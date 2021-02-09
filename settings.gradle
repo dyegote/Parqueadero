@@ -1,2 +1,4 @@
+include ':infrastructure:dataAcces'
+include ':domain'
 include ':presentation'
 rootProject.name = "Parking"
