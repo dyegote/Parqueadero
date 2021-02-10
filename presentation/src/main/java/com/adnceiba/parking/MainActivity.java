@@ -2,6 +2,8 @@ package com.adnceiba.parking;
 
 import android.os.Bundle;
 
+import com.adnceiba.domain.aggregate.Parking;
+import com.adnceiba.domain.valueobject.Tariff;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        Parking parking = new Parking(null,null,null, Tariff.CAR);
+
+
     }
 
     @Override
