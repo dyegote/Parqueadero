@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Parking parking = new Parking(null,null,null, Tariff.CAR);
+        //Parking parking = new Parking(null,null,null, Tariff.CAR);
 
 
     }

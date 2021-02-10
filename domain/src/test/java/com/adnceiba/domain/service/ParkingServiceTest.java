@@ -4,12 +4,10 @@ import com.adnceiba.domain.aggregate.Parking;
 import com.adnceiba.domain.builder.CarBuilder;
 import com.adnceiba.domain.builder.MotoBuilder;
 import com.adnceiba.domain.builder.ParkingBuilder;
-import com.adnceiba.domain.entity.Moto;
-import com.adnceiba.domain.entity.Vehicle;
 
 import org.junit.Test;
+import org.mockito.Mock;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -58,4 +56,7 @@ public class ParkingServiceTest {
 
         assertEquals(11500, total, 0.05);
     }
+
+
+
 }
