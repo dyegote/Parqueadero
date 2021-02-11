@@ -24,4 +24,11 @@ public class ParkingEntity {
     public String carTypeId;
     public boolean isActive;
 
+    public ParkingEntity(Date arrivingTime, Date leavingTime, String licensePlate, String carTypeId, boolean isActive) {
+        this.arrivingTime = arrivingTime;
+        this.leavingTime = leavingTime;
+        this.licensePlate = licensePlate;
+        this.carTypeId = carTypeId;
+        this.isActive = isActive;
+    }
 }

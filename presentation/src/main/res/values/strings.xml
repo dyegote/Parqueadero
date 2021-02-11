@@ -12,4 +12,5 @@
 
     <string name="vehicle_type">Tipo de vehiculo:</string>
     <string name="license_plate">Placa:</string>
+    <string name="cylinder">Cilindraje:</string>
 </resources>

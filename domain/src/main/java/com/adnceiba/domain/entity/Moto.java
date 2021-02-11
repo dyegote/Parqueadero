@@ -2,9 +2,9 @@ package com.adnceiba.domain.entity;
 
 public class Moto extends Vehicle {
 
-    private float cylinder;
+    private int cylinder;
 
-    public Moto(String licensePlate, float cylinder) {
+    public Moto(String licensePlate, int cylinder) {
         super(licensePlate);
         this.cylinder = cylinder;
     }
@@ -13,7 +13,7 @@ public class Moto extends Vehicle {
         super(licensePlate);
     }
 
-    public float getCylinder() {
+    public int getCylinder() {
         return cylinder;
     }
 }

@@ -6,4 +6,5 @@ public interface ParkingService {
 
     float calculatePrice(Parking parking);
     boolean checkCapacity(int currentAmount);
+    void enterVehicle(Parking parking);
 }

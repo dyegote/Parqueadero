@@ -6,11 +6,11 @@ public interface ParkingRepository {
 
     void save(Parking parking);
 
-    void update(Parking parking);
+    void updateInactive(Parking parking);
 
-    void get(String licensePlate);
+    Parking getByLicensePlate(String licensePlate) throws Exception;
 
-    int getTotalCar();
+    int getAmountCar();
 
-    int getTotalMoto();
+    int getAmountMoto();
 }

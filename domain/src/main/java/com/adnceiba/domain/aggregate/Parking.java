@@ -12,9 +12,7 @@ public class Parking {
     private Vehicle vehicle;
     private Tariff tariff;
 
-
-    public Parking(Date arrivingTime, Date leavingTime, Vehicle vehicle, Tariff tariff) throws Exception
-    {
+    public Parking(Date arrivingTime, Date leavingTime, Vehicle vehicle, Tariff tariff) throws Exception {
         this.arrivingTime = arrivingTime;
         this.leavingTime = leavingTime;
         this.tariff = tariff;
@@ -27,18 +25,16 @@ public class Parking {
      * @param vehicle
      * @throws Exception
      */
-    private void setVehicle(Vehicle vehicle) throws Exception
-    {
+    private void setVehicle(Vehicle vehicle) throws Exception {
         if(vehicle.getLicensePlate().startsWith("A")){
             Calendar calendar = Calendar.getInstance();
             if(Calendar.SUNDAY != calendar.get(Calendar.DAY_OF_WEEK) && Calendar.MONDAY != calendar.get(Calendar.DAY_OF_WEEK))
-                throw new Exception("Vehicle cannot enter.");
+                throw new Exception("Vehicolu solo puede ingresar Domingo y Lunes.");
         }
 
         this.vehicle = vehicle;
     }
-
-
+    
     public Date getArrivingTime() {
         return arrivingTime;
     }

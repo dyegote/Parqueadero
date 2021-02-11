@@ -14,19 +14,18 @@ import javax.inject.Inject;
 
 public class VehicleTypeRepositoryDB implements VehicleTypeRepository {
 
-    VehicleTypeDao vehicleTypeDao;
+    private VehicleTypeDao vehicleTypeDao;
 
     @Inject
     public VehicleTypeRepositoryDB(VehicleTypeDao vehicleTypeDao) {
         this.vehicleTypeDao = vehicleTypeDao;
-
     }
 
     @Override
     public void saveList(List<VehicleType> vehicleTypes) {
-        for(VehicleType item : vehicleTypes) {
+        for(VehicleType item : vehicleTypes)
             vehicleTypeDao.insert(new VehicleTypeTraslator().mapFromVehicleTypeToVehicleTypeEntity(item));
-        }
+
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.adnceiba.domain.service;
 import com.adnceiba.domain.aggregate.Parking;
 import com.adnceiba.domain.entity.Car;
 import com.adnceiba.domain.repository.CarRepository;
+import com.adnceiba.domain.repository.ParkingRepository;
 import com.adnceiba.domain.valueobject.Tariff;
 
 import javax.inject.Inject;
@@ -12,13 +13,12 @@ public class CarParkingService implements ParkingService {
     public static final int MAX_CAR_CAPACITY = 20;
 
     CarRepository carRepository;
-
-    public CarParkingService() {
-    }
+    ParkingRepository parkingRepository;
 
     @Inject
-    public CarParkingService(CarRepository carRepository) {
+    public CarParkingService(ParkingRepository parkingRepository, CarRepository carRepository) {
         this.carRepository = carRepository;
+        this.parkingRepository = parkingRepository;
     }
 
 
@@ -34,5 +34,13 @@ public class CarParkingService implements ParkingService {
     public boolean checkCapacity(int currentAmount) {
         return currentAmount <= MAX_CAR_CAPACITY;
     }
+
+    @Override
+    public void enterVehicle(Parking parking) {
+        carRepository.save((Car)parking.getVehicle());
+        parkingRepository.save(parking);
+
+    }
+
 
 }
