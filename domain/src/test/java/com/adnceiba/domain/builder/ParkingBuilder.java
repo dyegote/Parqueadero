@@ -4,6 +4,7 @@ import com.adnceiba.domain.aggregate.Parking;
 import com.adnceiba.domain.entity.Car;
 import com.adnceiba.domain.entity.Moto;
 import com.adnceiba.domain.entity.Vehicle;
+import com.adnceiba.domain.exception.DomainException;
 import com.adnceiba.domain.valueobject.Tariff;
 
 import java.util.Calendar;
@@ -27,8 +28,8 @@ public class ParkingBuilder {
         this.tariff = Tariff.CAR;
     }
 
-    public Parking build() throws Exception {
-        return new Parking(arrivingTime, leavingTime, vehicle, tariff);
+    public Parking build() throws DomainException {
+        return new Parking(arrivingTime.getTime(), leavingTime.getTime(), vehicle, tariff);
     }
 
     public ParkingBuilder withArrivingTime(Date arrivingTime){
