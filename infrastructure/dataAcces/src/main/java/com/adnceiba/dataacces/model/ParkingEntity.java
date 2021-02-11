@@ -1,5 +1,6 @@
 package com.adnceiba.dataacces.model;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor(suppressConstructorProperties = true )
+@AllArgsConstructor
 @Entity(tableName = "Parking", foreignKeys = @ForeignKey(entity = VehicleTypeEntity.class, parentColumns = "id", childColumns = "carTypeId"))
 public class ParkingEntity {
 
@@ -21,6 +22,7 @@ public class ParkingEntity {
     public Date arrivingTime;
     public Date leavingTime;
     public String licensePlate;
+    @ColumnInfo(name = "carTypeId", index = true)
     public String carTypeId;
     public boolean isActive;
 

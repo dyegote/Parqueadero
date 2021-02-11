@@ -17,6 +17,9 @@ public class MotoParkingService implements ParkingService{
     MotoRepository motoRepository;
     ParkingRepository parkingRepository;
 
+    public MotoParkingService() {
+    }
+
     @Inject
     public MotoParkingService(ParkingRepository parkingRepository, MotoRepository motoRepository) {
         this.motoRepository = motoRepository;

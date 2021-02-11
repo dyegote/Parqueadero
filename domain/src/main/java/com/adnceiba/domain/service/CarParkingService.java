@@ -15,6 +15,9 @@ public class CarParkingService implements ParkingService {
     CarRepository carRepository;
     ParkingRepository parkingRepository;
 
+    public CarParkingService() {
+    }
+
     @Inject
     public CarParkingService(ParkingRepository parkingRepository, CarRepository carRepository) {
         this.carRepository = carRepository;

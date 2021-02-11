@@ -5,7 +5,7 @@ import com.adnceiba.domain.entity.Moto;
 public class MotoBuilder {
 
     protected String licensePlate;
-    protected float cylinder;
+    protected int cylinder;
 
     public MotoBuilder() {
         this.licensePlate = "IBC123";
@@ -21,7 +21,7 @@ public class MotoBuilder {
         return  this;
     }
 
-    public MotoBuilder withCylinder(float cylinder){
+    public MotoBuilder withCylinder(int cylinder){
         this.cylinder = cylinder;
         return  this;
     }

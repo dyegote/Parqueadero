@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor(suppressConstructorProperties = true )
+@AllArgsConstructor
 @Entity(tableName = "VehicleType")
 public class VehicleTypeEntity {
 
