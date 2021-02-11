@@ -5,9 +5,9 @@ public enum Tariff {
     CAR(1000,8000,0),
     MOTO(500,4000,2000);
 
-    private float hourPrice;
-    private float dayPrice;
-    private float aditionalCylinderPrice;
+    private final float hourPrice;
+    private final float dayPrice;
+    private final float aditionalCylinderPrice;
 
     Tariff(float hourPrice, float dayPrice, float aditionalCylinderPrice) {
         this.hourPrice = hourPrice;

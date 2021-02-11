@@ -8,6 +8,10 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.adnceiba.dataacces.data.dao.CarDao;
+import com.adnceiba.dataacces.data.dao.MotoDao;
+import com.adnceiba.dataacces.data.dao.ParkingDao;
+import com.adnceiba.dataacces.data.dao.VehicleTypeDao;
 import com.adnceiba.dataacces.model.CarEntity;
 import com.adnceiba.dataacces.model.MotoEntity;
 import com.adnceiba.dataacces.model.ParkingEntity;

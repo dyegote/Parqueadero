@@ -9,10 +9,6 @@ public class Moto extends Vehicle {
         this.cylinder = cylinder;
     }
 
-    public Moto(String licensePlate) {
-        super(licensePlate);
-    }
-
     public int getCylinder() {
         return cylinder;
     }

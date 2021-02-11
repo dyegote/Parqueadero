@@ -1,7 +1,7 @@
 package com.adnceiba.dataacces.repository;
 
 import com.adnceiba.dataacces.anticorruption.VehicleTypeTraslator;
-import com.adnceiba.dataacces.data.VehicleTypeDao;
+import com.adnceiba.dataacces.data.dao.VehicleTypeDao;
 import com.adnceiba.dataacces.model.VehicleTypeEntity;
 import com.adnceiba.domain.entity.VehicleType;
 import com.adnceiba.domain.repository.VehicleTypeRepository;

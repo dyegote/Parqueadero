@@ -1,7 +1,5 @@
 package com.adnceiba.domain.entity;
 
-import java.util.Calendar;
-
 public abstract class Vehicle {
 
     private String licensePlate;

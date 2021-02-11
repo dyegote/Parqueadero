@@ -1,7 +1,7 @@
 package com.adnceiba.dataacces.repository;
 
 import com.adnceiba.dataacces.anticorruption.MotoTraslator;
-import com.adnceiba.dataacces.data.MotoDao;
+import com.adnceiba.dataacces.data.dao.MotoDao;
 import com.adnceiba.domain.entity.Moto;
 import com.adnceiba.domain.repository.MotoRepository;
 

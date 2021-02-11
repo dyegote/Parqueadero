@@ -7,7 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.adnceiba.dataacces.data.AppDataBase;
-import com.adnceiba.dataacces.data.VehicleTypeDao;
+import com.adnceiba.dataacces.data.dao.VehicleTypeDao;
 import com.adnceiba.dataacces.model.VehicleTypeEntity;
 
 import org.junit.Assert;

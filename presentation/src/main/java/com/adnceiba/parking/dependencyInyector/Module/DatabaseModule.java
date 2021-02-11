@@ -2,19 +2,12 @@ package com.adnceiba.parking.dependencyInyector.Module;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.adnceiba.dataacces.data.AppDataBase;
-import com.adnceiba.dataacces.data.CarDao;
-import com.adnceiba.dataacces.data.MotoDao;
-import com.adnceiba.dataacces.data.ParkingDao;
-import com.adnceiba.dataacces.data.VehicleTypeDao;
-import com.adnceiba.dataacces.model.VehicleTypeEntity;
-import com.adnceiba.domain.aggregate.Parking;
-import com.adnceiba.domain.entity.VehicleType;
+import com.adnceiba.dataacces.data.dao.CarDao;
+import com.adnceiba.dataacces.data.dao.MotoDao;
+import com.adnceiba.dataacces.data.dao.ParkingDao;
+import com.adnceiba.dataacces.data.dao.VehicleTypeDao;
 
 import javax.inject.Singleton;
 

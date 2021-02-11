@@ -1,4 +1,4 @@
-package com.adnceiba.dataacces.data;
+package com.adnceiba.dataacces.data.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

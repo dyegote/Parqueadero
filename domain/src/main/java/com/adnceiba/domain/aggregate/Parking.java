@@ -2,15 +2,15 @@ package com.adnceiba.domain.aggregate;
 
 import com.adnceiba.domain.entity.Vehicle;
 import com.adnceiba.domain.valueobject.Tariff;
-
 import java.util.Calendar;
 import java.util.Date;
 
 public class Parking {
-    private Date arrivingTime;
-    private Date leavingTime;
+    private static final String ONLY_CAN_ENTER_MONDAY_SUNDAY = "Vehiculo solo puede ingresar Domingo y Lunes.";
+    private final Date arrivingTime;
+    private final Date leavingTime;
+    private final Tariff tariff;
     private Vehicle vehicle;
-    private Tariff tariff;
 
     public Parking(Date arrivingTime, Date leavingTime, Vehicle vehicle, Tariff tariff) throws Exception {
         this.arrivingTime = arrivingTime;
@@ -29,7 +29,7 @@ public class Parking {
         if(vehicle.getLicensePlate().startsWith("A")){
             Calendar calendar = Calendar.getInstance();
             if(Calendar.SUNDAY != calendar.get(Calendar.DAY_OF_WEEK) && Calendar.MONDAY != calendar.get(Calendar.DAY_OF_WEEK))
-                throw new Exception("Vehicolu solo puede ingresar Domingo y Lunes.");
+                throw new Exception(ONLY_CAN_ENTER_MONDAY_SUNDAY);
         }
 
         this.vehicle = vehicle;

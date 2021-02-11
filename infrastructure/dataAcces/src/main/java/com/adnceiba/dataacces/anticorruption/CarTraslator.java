@@ -9,7 +9,7 @@ public class CarTraslator {
         return new CarEntity(car.getLicensePlate());
     }
 
-    public Car mapFromCarEntityeToCar(CarEntity carEntity) {
+    public Car mapFromCarEntityToCar(CarEntity carEntity) {
         return new Car(carEntity.getLicensePlate());
     }
 }

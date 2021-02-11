@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 public class VehicleTypeService {
 
-    VehicleTypeRepository vehicleTypeRepository;
+    private final VehicleTypeRepository vehicleTypeRepository;
 
     @Inject
     public VehicleTypeService(VehicleTypeRepository vehicleTypeRepository) {

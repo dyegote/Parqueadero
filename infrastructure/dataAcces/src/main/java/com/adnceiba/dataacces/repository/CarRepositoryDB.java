@@ -1,7 +1,7 @@
 package com.adnceiba.dataacces.repository;
 
 import com.adnceiba.dataacces.anticorruption.CarTraslator;
-import com.adnceiba.dataacces.data.CarDao;
+import com.adnceiba.dataacces.data.dao.CarDao;
 import com.adnceiba.domain.entity.Car;
 import com.adnceiba.domain.repository.CarRepository;
 

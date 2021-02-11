@@ -3,10 +3,9 @@ package com.adnceiba.dataacces.repository;
 import com.adnceiba.dataacces.anticorruption.CarTraslator;
 import com.adnceiba.dataacces.anticorruption.MotoTraslator;
 import com.adnceiba.dataacces.anticorruption.ParkingTraslator;
-import com.adnceiba.dataacces.anticorruption.VehicleTypeTraslator;
-import com.adnceiba.dataacces.data.CarDao;
-import com.adnceiba.dataacces.data.MotoDao;
-import com.adnceiba.dataacces.data.ParkingDao;
+import com.adnceiba.dataacces.data.dao.CarDao;
+import com.adnceiba.dataacces.data.dao.MotoDao;
+import com.adnceiba.dataacces.data.dao.ParkingDao;
 import com.adnceiba.dataacces.model.CarEntity;
 import com.adnceiba.dataacces.model.MotoEntity;
 import com.adnceiba.dataacces.model.ParkingEntity;
@@ -50,7 +49,7 @@ public class ParkingRepositoryDB implements ParkingRepository {
         switch (tariff){
             case CAR:
                 CarEntity carEntity = carDao.getByLicensePlate(licensePlate);
-                vehicle = new CarTraslator().mapFromCarEntityeToCar(carEntity);
+                vehicle = new CarTraslator().mapFromCarEntityToCar(carEntity);
                 break;
             case MOTO:
                 MotoEntity motoEntity = motoDao.getByLicensePlate(licensePlate);
