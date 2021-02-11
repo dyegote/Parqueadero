@@ -1,5 +1,6 @@
 package com.adnceiba.dataacces.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -13,8 +14,9 @@ import lombok.NoArgsConstructor;
 @Entity(tableName = "Moto")
 public class MotoEntity {
 
+    @NonNull
     @PrimaryKey
-    private String licensePlate;
-    private int cylinder;
+    public String licensePlate;
+    public int cylinder;
 
 }

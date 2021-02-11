@@ -2,40 +2,56 @@ package com.adnceiba.parking;
 
 import android.os.Bundle;
 
-import com.adnceiba.domain.aggregate.Parking;
-import com.adnceiba.domain.valueobject.Tariff;
+import com.adnceiba.dataacces.model.VehicleTypeEntity;
+import com.adnceiba.domain.entity.VehicleType;
+import com.adnceiba.domain.service.VehicleTypeService;
+import com.adnceiba.parking.ViewModel.VehicleTypeViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
+    VehicleTypeViewModel vehicleTypeViewModel;
+
+    private Spinner vehicleTypeSpinner;
+    private Button enterVehicleButton;
+    private EditText licensePlateEdiText;
+
+    @Inject
+    VehicleTypeService vehicleTypeService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        this.configureView();
+        this.loadObservers();
 
-        //Parking parking = new Parking(null,null,null, Tariff.CAR);
-
-
+        vehicleTypeViewModel.getVehicleTypes();
     }
 
     @Override
@@ -59,4 +75,26 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void configureView(){
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        this.vehicleTypeSpinner = (Spinner) findViewById(R.id.vehicleTypeSpinner);
+        this.enterVehicleButton = (Button) findViewById(R.id.enterButton);
+        this.licensePlateEdiText = (EditText) findViewById(R.id.licensePlateEditText);
+        vehicleTypeViewModel = new ViewModelProvider(this).get(VehicleTypeViewModel.class);
+    }
+
+    private void loadObservers(){
+        vehicleTypeViewModel.vehicleTypeLiveData.observe(this, vehicleTypeList -> {
+            List<CharSequence> items = new ArrayList<>();
+            for(VehicleType typeItem : vehicleTypeList)
+                items.add(typeItem.getId());
+            ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_list_item_1, items);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            vehicleTypeSpinner.setAdapter(adapter);
+        });
+    }
+
+
 }

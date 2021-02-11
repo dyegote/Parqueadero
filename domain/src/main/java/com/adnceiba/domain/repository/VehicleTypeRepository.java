@@ -6,4 +6,6 @@ import java.util.List;
 public interface VehicleTypeRepository {
 
     void saveList(List<VehicleType> typesVehicle);
+
+    List<VehicleType> loadAll();
 }

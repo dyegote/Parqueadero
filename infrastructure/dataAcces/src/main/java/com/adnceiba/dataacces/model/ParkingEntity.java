@@ -17,11 +17,11 @@ import lombok.NoArgsConstructor;
 public class ParkingEntity {
 
     @PrimaryKey(autoGenerate = true)
-    private  int id;
-    private Date arrivingTime;
-    private Date leavingTime;
-    private String licensePlate;
-    private String carTypeId;
-    private boolean isActive;
+    public  int id;
+    public Date arrivingTime;
+    public Date leavingTime;
+    public String licensePlate;
+    public String carTypeId;
+    public boolean isActive;
 
 }

@@ -16,6 +16,10 @@ public class VehicleTypeService {
         this.vehicleTypeRepository = vehicleTypeRepository;
     }
 
+    public List<VehicleType> loadAll(){
+        return vehicleTypeRepository.loadAll();
+    }
+
     public void saveVehicleType(List<VehicleType> vehicleTypes){
         vehicleTypeRepository.saveList(vehicleTypes);
     }
