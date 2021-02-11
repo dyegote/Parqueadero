@@ -60,6 +60,15 @@
             android:onClick="onClickEnterVehicle"
             android:text="@string/enter" />
 
+        <Button
+            android:id="@+id/leaveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:onClick="onClickLeaveVehicle"
+            android:text="@string/enter" />
+
 
 
 

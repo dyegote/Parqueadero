@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
     private VehicleTypeViewModel vehicleTypeViewModel;
     private Spinner vehicleTypeSpinner;
-    private Button enterVehicleButton;
     private EditText licensePlateEdiText;
     private EditText cylinderEditText;
     private TextView cylinderTextview;
@@ -96,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         this.vehicleTypeSpinner = (Spinner) findViewById(R.id.vehicleTypeSpinner);
-        this.enterVehicleButton = (Button) findViewById(R.id.enterButton);
         this.licensePlateEdiText = (EditText) findViewById(R.id.licensePlateEditText);
         this.cylinderEditText = (EditText) findViewById(R.id.cylinderTextViewEditText);
         this.cylinderTextview = (TextView) findViewById(R.id.cylinderTextView);
@@ -159,6 +157,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void onClickLeaveVehicle(View v) {
+
+    }
+
     private void enterCar(View v, String licensePlate) throws Exception {
 
         Vehicle car = new Car(licensePlateEdiText.getText().toString());
@@ -171,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
     private  void enterMoto(View v, String licensePlate) throws Exception {
         Vehicle moto = new Moto(licensePlateEdiText.getText().toString(),Integer.parseInt(cylinderEditText.getText().toString()));
         Parking parking = new Parking(Calendar.getInstance().getTime(),Calendar.getInstance().getTime(),moto,tariff);
+        motoParkingService.enterVehicle(parking);
         Snackbar.make(v, "INGRESO MOTO: " +licensePlateEdiText.getText(), Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
 

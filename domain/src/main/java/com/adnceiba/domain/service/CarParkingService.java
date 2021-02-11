@@ -21,7 +21,6 @@ public class CarParkingService implements ParkingService {
         this.parkingRepository = parkingRepository;
     }
 
-
     @Override
     public float calculatePrice(Parking parking) {
         ParkingTimeCalculatorService parkingTime = new ParkingTimeCalculatorService(parking.getArrivingTime(),parking.getLeavingTime());
@@ -40,6 +39,11 @@ public class CarParkingService implements ParkingService {
         carRepository.save((Car)parking.getVehicle());
         parkingRepository.save(parking);
 
+    }
+
+    @Override
+    public Parking leaveVehicle(String licensePlate) {
+        return null;
     }
 
 

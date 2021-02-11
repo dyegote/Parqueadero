@@ -1,8 +1,10 @@
 package com.adnceiba.domain.service;
 
 import com.adnceiba.domain.aggregate.Parking;
+import com.adnceiba.domain.entity.Car;
 import com.adnceiba.domain.entity.Moto;
 import com.adnceiba.domain.repository.MotoRepository;
+import com.adnceiba.domain.repository.ParkingRepository;
 import com.adnceiba.domain.valueobject.Tariff;
 
 import javax.inject.Inject;
@@ -13,9 +15,10 @@ public class MotoParkingService implements ParkingService{
     public static final int MAX_MOTO_CYLINDER = 500;
 
     MotoRepository motoRepository;
+    ParkingRepository parkingRepository;
 
     @Inject
-    public MotoParkingService(MotoRepository motoRepository) {
+    public MotoParkingService(ParkingRepository parkingRepository, MotoRepository motoRepository) {
         this.motoRepository = motoRepository;
     }
 
@@ -39,6 +42,12 @@ public class MotoParkingService implements ParkingService{
 
     @Override
     public void enterVehicle(Parking parking) {
+        motoRepository.save((Moto)parking.getVehicle());
+        parkingRepository.save(parking);
+    }
 
+    @Override
+    public Parking leaveVehicle(String licensePlate) {
+        return null;
     }
 }
