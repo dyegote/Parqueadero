@@ -13,9 +13,9 @@ public class Parking {
     private final Tariff tariff;
     private Vehicle vehicle;
 
-    public Parking(final Date arrivingTime, final Date leavingTime, Vehicle vehicle, Tariff tariff) throws DomainException {
-        this.arrivingTime = arrivingTime;
-        this.leavingTime = leavingTime;
+    public Parking(long arrivingTime, long leavingTime, Vehicle vehicle, Tariff tariff) throws DomainException {
+        this.arrivingTime = new Date(arrivingTime);
+        this.leavingTime = new Date(leavingTime);
         this.tariff = tariff;
         this.setVehicle(vehicle);
     }

@@ -1,9 +1,5 @@
 package com.adnceiba.domain.service;
 
-import com.adnceiba.domain.aggregate.Parking;
-
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class ParkingTimeCalculatorService {

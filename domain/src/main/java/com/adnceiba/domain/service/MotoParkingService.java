@@ -1,7 +1,6 @@
 package com.adnceiba.domain.service;
 
 import com.adnceiba.domain.aggregate.Parking;
-import com.adnceiba.domain.entity.Car;
 import com.adnceiba.domain.entity.Moto;
 import com.adnceiba.domain.repository.MotoRepository;
 import com.adnceiba.domain.repository.ParkingRepository;
@@ -28,7 +27,7 @@ public class MotoParkingService implements ParkingService{
     @Override
     public float calculatePrice(Parking parking) {
         ParkingTimeCalculatorService parkingTime = new ParkingTimeCalculatorService(parking.getArrivingTime(),parking.getLeavingTime());
-        Tariff tariff = parking.getTariff().MOTO;
+        Tariff tariff = Tariff.MOTO;
         Moto moto = (Moto)parking.getVehicle();
 
         float total = parkingTime.getParkingDays() * tariff.getDayPrice() + parkingTime.getParkingHours() * tariff.getHourPrice();

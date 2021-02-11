@@ -18,15 +18,15 @@ public class ParkingTraslator {
     }
 
     public Parking mapFromParkingEntityeToParking(ParkingEntity parkingEntity, MotoEntity motoEntity) throws DomainException {
-        return new Parking(parkingEntity.getArrivingTime(),
-                parkingEntity.getLeavingTime(),
+        return new Parking(parkingEntity.getArrivingTime().getTime(),
+                parkingEntity.getLeavingTime().getTime(),
                 new MotoTraslator().mapFromMotoEntityToMoto(motoEntity),
                 Tariff.valueOf(parkingEntity.getCarTypeId()));
     }
 
     public Parking mapFromParkingEntityeToParking(ParkingEntity parkingEntity, Vehicle vehicle) throws DomainException {
-        return new Parking(parkingEntity.getArrivingTime(),
-                parkingEntity.getLeavingTime(),
+        return new Parking(parkingEntity.getArrivingTime().getTime(),
+                parkingEntity.getLeavingTime().getTime(),
                 vehicle,
                 Tariff.valueOf(parkingEntity.getCarTypeId()));
     }

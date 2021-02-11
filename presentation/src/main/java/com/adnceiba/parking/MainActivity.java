@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
     private void enterCar(View v, String licensePlate) throws Exception {
 
         Vehicle car = new Car(licensePlateEdiText.getText().toString());
-        Parking parking = new Parking(Calendar.getInstance().getTime(),Calendar.getInstance().getTime(),car,tariff);
+        Parking parking = new Parking(Calendar.getInstance().getTime().getTime(),Calendar.getInstance().getTime().getTime(),car,tariff);
         carParkingService.enterVehicle(parking);
         Snackbar.make(v, "INGRESO CARRO: " +licensePlateEdiText.getText(), Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
     private  void enterMoto(View v, String licensePlate) throws Exception {
         Vehicle moto = new Moto(licensePlateEdiText.getText().toString(),Integer.parseInt(cylinderEditText.getText().toString()));
-        Parking parking = new Parking(Calendar.getInstance().getTime(),Calendar.getInstance().getTime(),moto,tariff);
+        Parking parking = new Parking(Calendar.getInstance().getTime().getTime(),Calendar.getInstance().getTime().getTime(),moto,tariff);
         motoParkingService.enterVehicle(parking);
         Snackbar.make(v, "INGRESO MOTO: " +licensePlateEdiText.getText(), Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
