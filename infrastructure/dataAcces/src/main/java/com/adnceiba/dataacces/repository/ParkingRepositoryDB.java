@@ -11,6 +11,7 @@ import com.adnceiba.dataacces.model.MotoEntity;
 import com.adnceiba.dataacces.model.ParkingEntity;
 import com.adnceiba.domain.aggregate.Parking;
 import com.adnceiba.domain.entity.Vehicle;
+import com.adnceiba.domain.exception.DomainException;
 import com.adnceiba.domain.repository.ParkingRepository;
 import com.adnceiba.domain.valueobject.Tariff;
 
@@ -40,7 +41,7 @@ public class ParkingRepositoryDB implements ParkingRepository {
     }
 
     @Override
-    public Parking getByLicensePlate(String licensePlate) throws Exception {
+    public Parking getByLicensePlate(String licensePlate) throws DomainException {
         Vehicle vehicle = null;
 
         ParkingEntity parkingEntity = parkingDao.getByLicensePlateActive(licensePlate);

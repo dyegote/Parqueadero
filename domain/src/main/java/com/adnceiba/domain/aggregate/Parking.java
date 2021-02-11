@@ -1,6 +1,7 @@
 package com.adnceiba.domain.aggregate;
 
 import com.adnceiba.domain.entity.Vehicle;
+import com.adnceiba.domain.exception.DomainException;
 import com.adnceiba.domain.valueobject.Tariff;
 import java.util.Calendar;
 import java.util.Date;
@@ -12,7 +13,7 @@ public class Parking {
     private final Tariff tariff;
     private Vehicle vehicle;
 
-    public Parking(Date arrivingTime, Date leavingTime, Vehicle vehicle, Tariff tariff) throws Exception {
+    public Parking(final Date arrivingTime, final Date leavingTime, Vehicle vehicle, Tariff tariff) throws DomainException {
         this.arrivingTime = arrivingTime;
         this.leavingTime = leavingTime;
         this.tariff = tariff;
@@ -22,14 +23,14 @@ public class Parking {
     /**
      * Metodo para ingresar la placa del vehiculo. Si la placa empieza por A y el dia es DOMINGO o LUNES,
      * lanza una excepcion para restringir el acceso al parqueadero
-     * @param vehicle
-     * @throws Exception
+     * @param vehicle vehicle
+     * @throws DomainException DomainException
      */
-    private void setVehicle(Vehicle vehicle) throws Exception {
+    private void setVehicle(Vehicle vehicle) throws DomainException {
         if(vehicle.getLicensePlate().startsWith("A")){
             Calendar calendar = Calendar.getInstance();
             if(Calendar.SUNDAY != calendar.get(Calendar.DAY_OF_WEEK) && Calendar.MONDAY != calendar.get(Calendar.DAY_OF_WEEK))
-                throw new Exception(ONLY_CAN_ENTER_MONDAY_SUNDAY);
+                throw new DomainException(ONLY_CAN_ENTER_MONDAY_SUNDAY);
         }
 
         this.vehicle = vehicle;

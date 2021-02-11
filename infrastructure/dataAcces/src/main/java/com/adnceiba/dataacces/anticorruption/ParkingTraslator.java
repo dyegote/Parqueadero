@@ -5,6 +5,7 @@ import com.adnceiba.dataacces.model.MotoEntity;
 import com.adnceiba.dataacces.model.ParkingEntity;
 import com.adnceiba.domain.aggregate.Parking;
 import com.adnceiba.domain.entity.Vehicle;
+import com.adnceiba.domain.exception.DomainException;
 import com.adnceiba.domain.valueobject.Tariff;
 
 public class ParkingTraslator {
@@ -16,14 +17,14 @@ public class ParkingTraslator {
                 parking.getTariff().toString(),true);
     }
 
-    public Parking mapFromParkingEntityeToParking(ParkingEntity parkingEntity, MotoEntity motoEntity) throws Exception {
+    public Parking mapFromParkingEntityeToParking(ParkingEntity parkingEntity, MotoEntity motoEntity) throws DomainException {
         return new Parking(parkingEntity.getArrivingTime(),
                 parkingEntity.getLeavingTime(),
                 new MotoTraslator().mapFromMotoEntityToMoto(motoEntity),
                 Tariff.valueOf(parkingEntity.getCarTypeId()));
     }
 
-    public Parking mapFromParkingEntityeToParking(ParkingEntity parkingEntity, Vehicle vehicle) throws Exception {
+    public Parking mapFromParkingEntityeToParking(ParkingEntity parkingEntity, Vehicle vehicle) throws DomainException {
         return new Parking(parkingEntity.getArrivingTime(),
                 parkingEntity.getLeavingTime(),
                 vehicle,

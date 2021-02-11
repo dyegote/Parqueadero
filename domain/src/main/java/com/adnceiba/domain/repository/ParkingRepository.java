@@ -1,6 +1,7 @@
 package com.adnceiba.domain.repository;
 
 import com.adnceiba.domain.aggregate.Parking;
+import com.adnceiba.domain.exception.DomainException;
 
 public interface ParkingRepository {
 
@@ -8,7 +9,7 @@ public interface ParkingRepository {
 
     void updateInactive(Parking parking);
 
-    Parking getByLicensePlate(String licensePlate) throws Exception;
+    Parking getByLicensePlate(String licensePlate) throws DomainException;
 
     int getAmountCar();
 
