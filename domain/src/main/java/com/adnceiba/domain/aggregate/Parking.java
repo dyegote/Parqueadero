@@ -37,11 +37,11 @@ public class Parking {
     }
     
     public Date getArrivingTime() {
-        return arrivingTime;
+        return new Date(arrivingTime.getTime());
     }
 
     public Date getLeavingTime() {
-        return leavingTime;
+        return new Date(leavingTime.getTime());
     }
 
     public Vehicle getVehicle() {

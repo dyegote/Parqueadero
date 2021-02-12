@@ -1,4 +1,4 @@
-package com.adnceiba.parking.dependencyInyector.Module;
+package com.adnceiba.parking.dependencyInyector.module;
 
 import android.content.Context;
 

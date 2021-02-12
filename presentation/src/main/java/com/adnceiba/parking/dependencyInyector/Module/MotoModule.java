@@ -1,4 +1,4 @@
-package com.adnceiba.parking.dependencyInyector.Module;
+package com.adnceiba.parking.dependencyInyector.module;
 
 import com.adnceiba.dataacces.repository.MotoRepositoryDB;
 import com.adnceiba.domain.repository.MotoRepository;

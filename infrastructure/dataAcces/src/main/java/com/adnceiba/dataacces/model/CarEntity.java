@@ -4,13 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity(tableName = "Car")
 public class CarEntity {
 
@@ -18,4 +11,12 @@ public class CarEntity {
     @PrimaryKey
     public String  licensePlate;
 
+    public CarEntity(@NonNull String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
+    @NonNull
+    public String getLicensePlate() {
+        return licensePlate;
+    }
 }

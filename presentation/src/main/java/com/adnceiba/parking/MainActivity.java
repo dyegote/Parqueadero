@@ -12,7 +12,7 @@ import com.adnceiba.domain.service.CarParkingService;
 import com.adnceiba.domain.service.MotoParkingService;
 import com.adnceiba.domain.service.VehicleTypeService;
 import com.adnceiba.domain.valueobject.Tariff;
-import com.adnceiba.parking.ViewModel.VehicleTypeViewModel;
+import com.adnceiba.parking.viewModel.VehicleTypeViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         catch (Exception ex){
+            ex.printStackTrace();
             Snackbar.make(v, ex.getMessage(), Snackbar.LENGTH_LONG).setAction("Action", null).show();
         }
     }

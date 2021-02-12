@@ -1,4 +1,4 @@
-package com.adnceiba.parking.ViewModel;
+package com.adnceiba.parking.viewModel;
 
 import java.util.List;
 import androidx.hilt.lifecycle.ViewModelInject;

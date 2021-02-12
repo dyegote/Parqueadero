@@ -4,13 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity(tableName = "Moto")
 public class MotoEntity {
 
@@ -19,4 +12,17 @@ public class MotoEntity {
     public String licensePlate;
     public int cylinder;
 
+    public MotoEntity(@NonNull String licensePlate, int cylinder) {
+        this.licensePlate = licensePlate;
+        this.cylinder = cylinder;
+    }
+
+    @NonNull
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public int getCylinder() {
+        return cylinder;
+    }
 }

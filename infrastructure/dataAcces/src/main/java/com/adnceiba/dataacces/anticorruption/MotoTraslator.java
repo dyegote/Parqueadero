@@ -12,4 +12,6 @@ public class MotoTraslator {
     public Moto mapFromMotoEntityToMoto(MotoEntity motoEntity) {
         return new Moto(motoEntity.getLicensePlate(), motoEntity.getCylinder());
     }
+
+
 }

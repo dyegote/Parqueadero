@@ -7,13 +7,6 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity(tableName = "Parking", foreignKeys = @ForeignKey(entity = VehicleTypeEntity.class, parentColumns = "id", childColumns = "carTypeId"))
 public class ParkingEntity {
 
@@ -32,5 +25,33 @@ public class ParkingEntity {
         this.licensePlate = licensePlate;
         this.carTypeId = carTypeId;
         this.isActive = isActive;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Date getArrivingTime() {
+        return arrivingTime;
+    }
+
+    public Date getLeavingTime() {
+        return leavingTime;
+    }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public String getCarTypeId() {
+        return carTypeId;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }
