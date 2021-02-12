@@ -41,6 +41,7 @@ tasks.withType(Test) {
         events "skipped", "passed", "failed"
         showStandardStreams true
     }
+    finalizedBy(jacocoTestReport)
 }
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
@@ -60,6 +61,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
             "outputs/code-coverage/connected/*coverage.ec"]))
 
 }
+
 
 dependencies {
     testImplementation 'junit:junit:4.+'
