@@ -48,9 +48,10 @@ public class MotoParkingService implements ParkingService{
     @Override
     public void enterVehicle(Parking parking) {
         if(parkingRepository.getAmountMoto() > MAX_MOTO_CAPACITY)
-            throw new CapacityException(Tariff.MOTO,this.MAX_MOTO_CAPACITY);
+            throw new CapacityException(Tariff.MOTO,MAX_MOTO_CAPACITY);
 
         Moto moto = motoRepository.getByLicensePlate(parking.getVehicle().getLicensePlate());
+        if(moto == null)
             motoRepository.save((Moto)parking.getVehicle());
 
         parkingRepository.save(parking);

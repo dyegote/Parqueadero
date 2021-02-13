@@ -8,14 +8,10 @@ public class CapacityException extends RuntimeException {
 
     public CapacityException(Tariff tariff, int maxCapoacity) {
         super();
-        switch(tariff){
-            case CAR:
-                message = String.format("Only car enter %d cars", maxCapoacity);
-                break;
-            case MOTO:
-                message = String.format("Only car enter %d motorcycles", maxCapoacity);
-                break;
-        }
+        if(tariff == Tariff.CAR)
+            message = String.format("Only car enter %d cars", maxCapoacity);
+        else
+            message = String.format("Only car enter %d motorcycles", maxCapoacity);
     }
 
     @Override
