@@ -24,4 +24,9 @@ public class MotoRepositoryDB implements MotoRepository {
     public void save(Moto moto) {
         motoDao.insert(new MotoTraslator().mapFromMotoToMotoEntity(moto));
     }
+
+    @Override
+    public Moto getByLicensePlate(String licensePlate){
+        return new MotoTraslator().mapFromMotoEntityToMoto(motoDao.getByLicensePlate(licensePlate));
+    }
 }
