@@ -2,6 +2,7 @@ package com.adnceiba.domain.service;
 
 import com.adnceiba.domain.aggregate.Parking;
 import com.adnceiba.domain.entity.Moto;
+import com.adnceiba.domain.exception.CapacityException;
 import com.adnceiba.domain.repository.MotoRepository;
 import com.adnceiba.domain.repository.ParkingRepository;
 import com.adnceiba.domain.valueobject.Tariff;
@@ -46,7 +47,12 @@ public class MotoParkingService implements ParkingService{
 
     @Override
     public void enterVehicle(Parking parking) {
-        motoRepository.save((Moto)parking.getVehicle());
+        if(parkingRepository.getAmountMoto() > MAX_MOTO_CAPACITY)
+            throw new CapacityException(Tariff.MOTO,this.MAX_MOTO_CAPACITY);
+
+        Moto moto = motoRepository.getByLicensePlate(parking.getVehicle().getLicensePlate());
+            motoRepository.save((Moto)parking.getVehicle());
+
         parkingRepository.save(parking);
     }
 
