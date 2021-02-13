@@ -2,9 +2,7 @@ package com.adnceiba.domain.service;
 
 import com.adnceiba.domain.entity.VehicleType;
 import com.adnceiba.domain.repository.VehicleTypeRepository;
-
 import java.util.List;
-
 import javax.inject.Inject;
 
 public class VehicleTypeService {
@@ -20,7 +18,4 @@ public class VehicleTypeService {
         return vehicleTypeRepository.loadAll();
     }
 
-    public void saveVehicleType(List<VehicleType> vehicleTypes){
-        vehicleTypeRepository.saveList(vehicleTypes);
-    }
 }

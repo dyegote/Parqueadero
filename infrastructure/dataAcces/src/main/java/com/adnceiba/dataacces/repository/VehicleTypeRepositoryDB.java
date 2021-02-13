@@ -24,13 +24,6 @@ public class VehicleTypeRepositoryDB implements VehicleTypeRepository {
     }
 
     @Override
-    public void saveList(List<VehicleType> vehicleTypes) {
-        for(VehicleType item : vehicleTypes)
-            vehicleTypeDao.insert(new VehicleTypeTraslator().mapFromVehicleTypeToVehicleTypeEntity(item));
-
-    }
-
-    @Override
     public List<VehicleType> loadAll() {
         List<VehicleTypeEntity> vehicleTypeEntityList = vehicleTypeDao.getAll();
         List<VehicleType> vehicleTypeList = new ArrayList<>();
