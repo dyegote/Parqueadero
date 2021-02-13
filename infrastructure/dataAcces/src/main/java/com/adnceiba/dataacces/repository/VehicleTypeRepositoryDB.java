@@ -1,24 +1,26 @@
 package com.adnceiba.dataacces.repository;
 
+import android.content.Context;
 import com.adnceiba.dataacces.anticorruption.VehicleTypeTraslator;
+import com.adnceiba.dataacces.data.AppDataBase;
 import com.adnceiba.dataacces.data.dao.VehicleTypeDao;
 import com.adnceiba.dataacces.model.VehicleTypeEntity;
 import com.adnceiba.domain.entity.VehicleType;
 import com.adnceiba.domain.repository.VehicleTypeRepository;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
-
+import dagger.hilt.android.qualifiers.ApplicationContext;
 
 public class VehicleTypeRepositoryDB implements VehicleTypeRepository {
 
+    private Context context;
     private VehicleTypeDao vehicleTypeDao;
 
     @Inject
-    public VehicleTypeRepositoryDB(VehicleTypeDao vehicleTypeDao) {
-        this.vehicleTypeDao = vehicleTypeDao;
+    public VehicleTypeRepositoryDB(@ApplicationContext Context context) {
+        this.context = context;
+        this.vehicleTypeDao = AppDataBase.getInstance(this.context).vehicleTypeDao();
     }
 
     @Override
