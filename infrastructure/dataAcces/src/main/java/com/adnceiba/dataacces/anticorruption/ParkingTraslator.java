@@ -21,15 +21,13 @@ public class ParkingTraslator {
         return new Parking(parkingEntity.getArrivingTime().getTime(),
                 parkingEntity.getLeavingTime().getTime(),
                 new MotoTraslator().mapFromMotoEntityToMoto(motoEntity),
-                Tariff.valueOf(parkingEntity.getCarTypeId()),
-                parkingEntity.isActive());
+                Tariff.valueOf(parkingEntity.getCarTypeId()));
     }
 
     public Parking mapFromParkingEntityToParking(ParkingEntity parkingEntity, Vehicle vehicle) throws DomainException {
         return new Parking(parkingEntity.getArrivingTime().getTime(),
                 parkingEntity.getLeavingTime().getTime(),
                 vehicle,
-                Tariff.valueOf(parkingEntity.getCarTypeId()),
-                parkingEntity.isActive());
+                Tariff.valueOf(parkingEntity.getCarTypeId()));
     }
 }

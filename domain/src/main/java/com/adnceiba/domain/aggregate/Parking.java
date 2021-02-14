@@ -13,13 +13,11 @@ public class Parking {
     private Date leavingTime;
     private final Tariff tariff;
     private Vehicle vehicle;
-    private boolean isActive;
 
-    public Parking(long arrivingTime, long leavingTime, Vehicle vehicle, Tariff tariff, boolean isActive) throws DomainException {
+    public Parking(long arrivingTime, long leavingTime, Vehicle vehicle, Tariff tariff) throws DomainException {
         this.arrivingTime = new Date(arrivingTime);
         this.leavingTime = new Date(leavingTime);
         this.tariff = tariff;
-        this.isActive = isActive;
         this.setVehicle(vehicle);
     }
 
@@ -59,4 +57,5 @@ public class Parking {
     public Tariff getTariff() {
         return tariff;
     }
+
 }

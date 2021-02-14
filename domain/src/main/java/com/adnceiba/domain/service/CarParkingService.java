@@ -2,7 +2,6 @@ package com.adnceiba.domain.service;
 
 import com.adnceiba.domain.aggregate.Parking;
 import com.adnceiba.domain.entity.Car;
-import com.adnceiba.domain.entity.Moto;
 import com.adnceiba.domain.exception.CapacityException;
 import com.adnceiba.domain.exception.EntryNotAllowedException;
 import com.adnceiba.domain.repository.CarRepository;

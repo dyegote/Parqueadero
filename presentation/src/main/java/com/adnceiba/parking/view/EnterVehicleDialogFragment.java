@@ -159,14 +159,14 @@ public class EnterVehicleDialogFragment extends DialogFragment {
 
     private void enterCar(String licensePlate) throws Exception {
         Vehicle car = new Car(licensePlateEdiText.getText().toString());
-        Parking parking = new Parking(Calendar.getInstance().getTime().getTime(),Calendar.getInstance().getTime().getTime(),car,tariff,true);
+        Parking parking = new Parking(Calendar.getInstance().getTime().getTime(),Calendar.getInstance().getTime().getTime(),car,tariff);
         carParkingService.enterVehicle(parking);
         Toast.makeText(getContext(),"INGRESO CARRO: ", Toast.LENGTH_LONG).show();
     }
 
     private  void enterMoto(String licensePlate) throws Exception {
         Vehicle moto = new Moto(licensePlateEdiText.getText().toString(),Integer.parseInt(cylinderEditText.getText().toString()));
-        Parking parking = new Parking(Calendar.getInstance().getTime().getTime(),Calendar.getInstance().getTime().getTime(),moto,tariff,true);
+        Parking parking = new Parking(Calendar.getInstance().getTime().getTime(),Calendar.getInstance().getTime().getTime(),moto,tariff);
         motoParkingService.enterVehicle(parking);
         Toast.makeText(getContext(),"INGRESO MOTO: ", Toast.LENGTH_LONG).show();
     }
