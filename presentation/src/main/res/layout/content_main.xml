@@ -5,72 +5,40 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="50dp">
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/vehicleTypeTextView"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vehicle_type" />
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin">
 
-        <Spinner
-            android:id="@+id/vehicleTypeSpinner"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/cylinderTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cylinder" />
+                <EditText
+                    android:id="@+id/editTextSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/edit_text_search"
+                    android:inputType="textPersonName"/>
 
-        <EditText
-            android:id="@+id/cylinderTextViewEditText"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:inputType="number"
-            android:text="50" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/licensePlateTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/license_plate" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/parkingRecyclerView"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/textInputLayoutSearch"/>
 
-        <EditText
-            android:id="@+id/licensePlateEditText"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:inputType="textNoSuggestions|textCapCharacters"
-            android:maxLength="6" />
-
-        <Button
-            android:id="@+id/enterButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:onClick="onClickEnterVehicle"
-            android:text="@string/enter" />
-
-        <Button
-            android:id="@+id/leaveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:onClick="onClickLeaveVehicle"
-            android:text="@string/enter" />
-
-
-
+        </RelativeLayout>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

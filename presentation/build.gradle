@@ -37,6 +37,7 @@ dependencies {
     implementation project(path: ':infrastructure:dataAcces')
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.navigation:navigation-fragment:2.3.3'
@@ -45,6 +46,8 @@ dependencies {
 
     implementation "com.google.dagger:hilt-android:2.28-alpha"
     implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     annotationProcessor "com.google.dagger:hilt-android-compiler:2.28-alpha"
     annotationProcessor 'androidx.hilt:hilt-compiler:1.0.0-alpha01'
     

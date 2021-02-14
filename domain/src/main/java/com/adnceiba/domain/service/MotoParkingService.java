@@ -9,7 +9,7 @@ import com.adnceiba.domain.valueobject.Tariff;
 
 import javax.inject.Inject;
 
-public class MotoParkingService implements ParkingService{
+public class MotoParkingService implements IParking {
 
     public static final int MAX_MOTO_CAPACITY = 10;
     public static final int MAX_MOTO_CYLINDER = 500;

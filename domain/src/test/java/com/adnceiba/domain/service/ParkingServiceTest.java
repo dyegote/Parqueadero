@@ -6,7 +6,6 @@ import com.adnceiba.domain.builder.MotoBuilder;
 import com.adnceiba.domain.builder.ParkingBuilder;
 
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,7 +22,7 @@ public class ParkingServiceTest {
         Parking parking = new ParkingBuilder(new CarBuilder().build())
                 .withArrivingTime(star)
                 .withLeavingTime(end).build();
-        ParkingService parkingService = new CarParkingService();
+        IParking parkingService = new CarParkingService();
 
         //Act
         float total = parkingService.calculatePrice(parking);
@@ -40,7 +39,7 @@ public class ParkingServiceTest {
         Parking parking = new ParkingBuilder(new MotoBuilder().withCylinder(600).build())
                 .withArrivingTime(star)
                 .withLeavingTime(end).build();
-        ParkingService parkingService = new MotoParkingService();
+        IParking parkingService = new MotoParkingService();
 
         //Act
         float total = parkingService.calculatePrice(parking);

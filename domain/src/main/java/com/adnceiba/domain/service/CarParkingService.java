@@ -8,7 +8,7 @@ import com.adnceiba.domain.valueobject.Tariff;
 
 import javax.inject.Inject;
 
-public class CarParkingService implements ParkingService {
+public class CarParkingService implements IParking {
 
     public static final int MAX_CAR_CAPACITY = 20;
 

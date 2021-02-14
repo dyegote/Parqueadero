@@ -6,6 +6,8 @@ import androidx.room.Query;
 import androidx.room.Update;
 import com.adnceiba.dataacces.model.ParkingEntity;
 
+import java.util.List;
+
 @Dao
 public interface ParkingDao {
 
@@ -17,4 +19,10 @@ public interface ParkingDao {
 
     @Query("SELECT * FROM Parking WHERE licensePlate = :licensePlate and isActive = 1")
     ParkingEntity getByLicensePlateActive(String licensePlate);
+
+    @Query("SELECT * FROM Parking WHERE isActive = 1")
+    List<ParkingEntity> getAllActive();
+
+    @Query("SELECT * FROM Parking WHERE licensePlate like :licensePlate || '%' and isActive = 1")
+    List<ParkingEntity> searchByLicensePlate(String licensePlate);
 }

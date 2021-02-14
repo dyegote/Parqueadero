@@ -17,6 +17,10 @@ import com.adnceiba.domain.entity.Vehicle;
 import com.adnceiba.domain.exception.DomainException;
 import com.adnceiba.domain.repository.ParkingRepository;
 import com.adnceiba.domain.valueobject.Tariff;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 
@@ -65,7 +69,45 @@ public class ParkingRepositoryDB implements ParkingRepository {
                 break;
         }
 
-        return new ParkingTraslator().mapFromParkingEntityeToParking(parkingEntity, vehicle);
+        return new ParkingTraslator().mapFromParkingEntityToParking(parkingEntity, vehicle);
+    }
+
+    @Override
+    public List<Parking> getListActive() {
+        Vehicle vehicle = null;
+        List<ParkingEntity> parkingEntityList = parkingDao.getAllActive();
+        List<Parking> parkingList = new ArrayList<>();
+        for(ParkingEntity entity : parkingEntityList){
+            if(Tariff.valueOf(entity.getCarTypeId()) == Tariff.MOTO) {
+                MotoEntity motoEntity = motoDao.getByLicensePlate(entity.getLicensePlate());
+                vehicle = new MotoTraslator().mapFromMotoEntityToMoto(motoEntity);
+            }
+            else{
+                CarEntity carEntity = carDao.getByLicensePlate(entity.getLicensePlate());
+                vehicle = new CarTraslator().mapFromCarEntityToCar(carEntity);
+            }
+            parkingList.add(new ParkingTraslator().mapFromParkingEntityToParking(entity,vehicle));
+        }
+        return parkingList;
+    }
+
+    @Override
+    public List<Parking> searchByLicensePlate(String licensePlate) {
+        Vehicle vehicle = null;
+        List<ParkingEntity> parkingEntityList = parkingDao.searchByLicensePlate(licensePlate);
+        List<Parking> parkingList = new ArrayList<>();
+        for(ParkingEntity entity : parkingEntityList){
+            if(Tariff.valueOf(entity.getCarTypeId()) == Tariff.MOTO) {
+                MotoEntity motoEntity = motoDao.getByLicensePlate(entity.getLicensePlate());
+                vehicle = new MotoTraslator().mapFromMotoEntityToMoto(motoEntity);
+            }
+            else{
+                CarEntity carEntity = carDao.getByLicensePlate(entity.getLicensePlate());
+                vehicle = new CarTraslator().mapFromCarEntityToCar(carEntity);
+            }
+            parkingList.add(new ParkingTraslator().mapFromParkingEntityToParking(entity,vehicle));
+        }
+        return parkingList;
     }
 
     @Override

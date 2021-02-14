@@ -4,7 +4,7 @@ import com.adnceiba.domain.valueobject.Tariff;
 
 public class CapacityException extends RuntimeException {
 
-    private String message;
+    private final String message;
 
     public CapacityException(Tariff tariff, int maxCapoacity) {
         super();

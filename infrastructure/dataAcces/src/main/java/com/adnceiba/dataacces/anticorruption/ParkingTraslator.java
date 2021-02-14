@@ -17,17 +17,19 @@ public class ParkingTraslator {
                 parking.getTariff().toString(),true);
     }
 
-    public Parking mapFromParkingEntityeToParking(ParkingEntity parkingEntity, MotoEntity motoEntity) throws DomainException {
+    public Parking mapFromParkingEntityToParking(ParkingEntity parkingEntity, MotoEntity motoEntity) throws DomainException {
         return new Parking(parkingEntity.getArrivingTime().getTime(),
                 parkingEntity.getLeavingTime().getTime(),
                 new MotoTraslator().mapFromMotoEntityToMoto(motoEntity),
-                Tariff.valueOf(parkingEntity.getCarTypeId()));
+                Tariff.valueOf(parkingEntity.getCarTypeId()),
+                parkingEntity.isActive());
     }
 
-    public Parking mapFromParkingEntityeToParking(ParkingEntity parkingEntity, Vehicle vehicle) throws DomainException {
+    public Parking mapFromParkingEntityToParking(ParkingEntity parkingEntity, Vehicle vehicle) throws DomainException {
         return new Parking(parkingEntity.getArrivingTime().getTime(),
                 parkingEntity.getLeavingTime().getTime(),
                 vehicle,
-                Tariff.valueOf(parkingEntity.getCarTypeId()));
+                Tariff.valueOf(parkingEntity.getCarTypeId()),
+                parkingEntity.isActive());
     }
 }
