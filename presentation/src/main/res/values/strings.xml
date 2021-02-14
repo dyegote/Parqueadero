@@ -14,7 +14,9 @@
     <string name="vehicle_type">Tipo de vehiculo:</string>
     <string name="license_plate">Placa:</string>
     <string name="cylinder">Cilindraje:</string>
-    <string name="edit_text_search">Type the license plate</string>
+    <string name="edit_text_search">Escriba la placa</string>
     <string name="list_is_empty">List is empty</string>
+    <string name="accept">ACEPTAR</string>
+    <string name="cancel">CANCELAR</string>
 
 </resources>

@@ -20,9 +20,9 @@ public interface ParkingDao {
     @Query("SELECT * FROM Parking WHERE licensePlate = :licensePlate and isActive = 1")
     ParkingEntity getByLicensePlateActive(String licensePlate);
 
-    @Query("SELECT * FROM Parking WHERE isActive = 1")
+    @Query("SELECT * FROM Parking WHERE isActive = 1 ORDER BY arrivingTime DESC")
     List<ParkingEntity> getAllActive();
 
-    @Query("SELECT * FROM Parking WHERE licensePlate like :licensePlate || '%' and isActive = 1")
+    @Query("SELECT * FROM Parking WHERE licensePlate like :licensePlate || '%' and isActive = 1 ORDER BY arrivingTime DESC")
     List<ParkingEntity> searchByLicensePlate(String licensePlate);
 }

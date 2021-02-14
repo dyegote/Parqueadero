@@ -10,6 +10,8 @@ public class MotoTraslator {
     }
 
     public Moto mapFromMotoEntityToMoto(MotoEntity motoEntity) {
+        if(motoEntity == null)
+            return  null;
         return new Moto(motoEntity.getLicensePlate(), motoEntity.getCylinder());
     }
 
