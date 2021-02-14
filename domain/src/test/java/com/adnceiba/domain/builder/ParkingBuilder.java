@@ -29,7 +29,7 @@ public class ParkingBuilder {
     }
 
     public Parking build() throws DomainException {
-        return new Parking(arrivingTime.getTime(), leavingTime.getTime(), vehicle, tariff,true);
+        return new Parking(arrivingTime.getTime(), leavingTime.getTime(), vehicle, tariff);
     }
 
     public ParkingBuilder withArrivingTime(Date arrivingTime){
