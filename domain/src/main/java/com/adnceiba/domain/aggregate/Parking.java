@@ -19,6 +19,7 @@ public class Parking {
         this.arrivingTime = new Date(arrivingTime);
         this.leavingTime = new Date(leavingTime);
         this.tariff = tariff;
+        this.isActive = isActive;
         this.setVehicle(vehicle);
     }
 

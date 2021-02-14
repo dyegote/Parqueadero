@@ -54,9 +54,4 @@ public class MotoParkingService {
 
         parkingRepository.save(parking);
     }
-
-    public Parking leaveVehicle(String licensePlate) {
-
-        return null;
-    }
 }

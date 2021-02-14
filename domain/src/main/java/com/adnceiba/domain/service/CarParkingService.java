@@ -30,7 +30,7 @@ public class CarParkingService {
 
     public float calculatePrice(Parking parking) {
         ParkingTimeCalculatorService parkingTime = new ParkingTimeCalculatorService(parking.getArrivingTime(),parking.getLeavingTime());
-        Tariff tariff = parking.getTariff().CAR;
+        Tariff tariff = Tariff.CAR;
 
         return parkingTime.getParkingDays() * tariff.getDayPrice() + parkingTime.getParkingHours() * tariff.getHourPrice();
     }
@@ -50,10 +50,4 @@ public class CarParkingService {
         parkingRepository.save(parking);
 
     }
-
-    public Parking leaveVehicle(String licensePlate) {
-        return null;
-    }
-
-
 }
