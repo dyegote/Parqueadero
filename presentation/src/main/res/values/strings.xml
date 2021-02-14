@@ -18,5 +18,7 @@
     <string name="list_is_empty">List is empty</string>
     <string name="accept">ACEPTAR</string>
     <string name="cancel">CANCELAR</string>
+    <string name="enter_vehicle_tittle">INGRESAR VEHICULO</string>
+    <string name="leave_vehicle_tittle">SACAR VEHICULO</string>
 
 </resources>

@@ -10,7 +10,7 @@ import java.util.Date;
 public class Parking {
 
     private final Date arrivingTime;
-    private final Date leavingTime;
+    private Date leavingTime;
     private final Tariff tariff;
     private Vehicle vehicle;
     private boolean isActive;
@@ -31,6 +31,7 @@ public class Parking {
     private void setVehicle(Vehicle vehicle) throws DomainException {
         if(vehicle.getLicensePlate().startsWith("A")){
             Calendar calendar = Calendar.getInstance();
+            calendar.setTime(this.arrivingTime);
             if(Calendar.SUNDAY != calendar.get(Calendar.DAY_OF_WEEK) && Calendar.MONDAY != calendar.get(Calendar.DAY_OF_WEEK))
                 throw new EntryNotAllowedException();
         }
@@ -44,6 +45,10 @@ public class Parking {
 
     public Date getLeavingTime() {
         return new Date(leavingTime.getTime());
+    }
+
+    public void setLeavingTime(long leavingTime) {
+        this.leavingTime = new Date(leavingTime);
     }
 
     public Vehicle getVehicle() {

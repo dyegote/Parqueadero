@@ -1,50 +1,48 @@
 package com.adnceiba.domain.service;
 
 import com.adnceiba.domain.aggregate.Parking;
-import com.adnceiba.domain.builder.MotoBuilder;
+import com.adnceiba.domain.builder.CarBuilder;
 import com.adnceiba.domain.builder.ParkingBuilder;
-import com.adnceiba.domain.entity.Moto;
+import com.adnceiba.domain.entity.Car;
 import com.adnceiba.domain.exception.CapacityException;
 import com.adnceiba.domain.exception.EntryNotAllowedException;
-import com.adnceiba.domain.repository.MotoRepository;
+import com.adnceiba.domain.repository.CarRepository;
 import com.adnceiba.domain.repository.ParkingRepository;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MotoParkingServiceTest {
+public class CarParkingServiceTest {
 
-    private MotoParkingService motoParkingService;
+    private CarParkingService carParkingService;
 
     @Mock
-    private MotoRepository motoRepository;
+    private CarRepository carRepository;
     @Mock
     private ParkingRepository parkingRepository;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        motoParkingService = new MotoParkingService(parkingRepository,motoRepository);
+        carParkingService = new CarParkingService(parkingRepository,carRepository);
     }
 
     @Test
     public void enterVehicle_licensePlateNotStarWithA_allowEnter() throws ParseException {
         //Arrange
-        Moto moto = new MotoBuilder().withLicensePlate("ZXC123").build();
-        Parking parking = new ParkingBuilder(moto).build();
+        Car car = new CarBuilder().withLicensePlate("ZXC123").build();
+        Parking parking = new ParkingBuilder(car).build();
 
         //Act
-        motoParkingService.enterVehicle(parking);
+        carParkingService.enterVehicle(parking);
 
         //Assert
-        Mockito.verify(motoRepository).save(moto);
+        Mockito.verify(carRepository).save(car);
         Mockito.verify(parkingRepository).save(parking);
     }
 
@@ -52,60 +50,60 @@ public class MotoParkingServiceTest {
     public void enterVehicle_licensePlateStarWithANotMonday_notAllowEnter() throws ParseException {
         //Arrange
         Date star = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse("2021-01-21 08:00:00");
-        Moto moto = new MotoBuilder().withLicensePlate("AXC123").build();
-        Parking parking = new ParkingBuilder(moto).withArrivingTime(star).build();
+        Car car = new CarBuilder().withLicensePlate("AXC123").build();
+        Parking parking = new ParkingBuilder(car).withArrivingTime(star).build();
 
         //Act
-        motoParkingService.enterVehicle(parking);
+        carParkingService.enterVehicle(parking);
 
         //Assert
-        Mockito.verify(motoRepository).save(moto);
+        Mockito.verify(carRepository).save(car);
         Mockito.verify(parkingRepository).save(parking);
     }
 
     @Test
     public void enterVehicle_notExceedMaximumCapacity_allowEnter() {
         //Arrange
-        Moto moto = new MotoBuilder().withLicensePlate("BXC123").build();
-        Parking parking = new ParkingBuilder(moto).build();
-        Mockito.when(parkingRepository.getAmountMoto()).thenReturn(5);
+        Car car = new CarBuilder().withLicensePlate("BXC123").build();
+        Parking parking = new ParkingBuilder(car).build();
+        Mockito.when(parkingRepository.getAmountCar()).thenReturn(10);
 
         //Act
-        motoParkingService.enterVehicle(parking);
+        carParkingService.enterVehicle(parking);
 
         //Assert
-        Mockito.verify(motoRepository).save(moto);
+        Mockito.verify(carRepository).save(car);
         Mockito.verify(parkingRepository).save(parking);
     }
 
     @Test(expected = CapacityException.class)
     public void enterVehicle_exceedMaximumCapacity_notAllowEnter() {
         //Arrange
-        Moto moto = new MotoBuilder().withLicensePlate("BXC123").build();
-        Parking parking = new ParkingBuilder(moto).build();
-        Mockito.when(parkingRepository.getAmountMoto()).thenReturn(10);
+        Car car = new CarBuilder().withLicensePlate("BXC123").build();
+        Parking parking = new ParkingBuilder(car).build();
+        Mockito.when(parkingRepository.getAmountCar()).thenReturn(20);
 
         //Act
-        motoParkingService.enterVehicle(parking);
+        carParkingService.enterVehicle(parking);
 
         //Assert
-        Mockito.verify(motoRepository).save(moto);
+        Mockito.verify(carRepository).save(car);
         Mockito.verify(parkingRepository).save(parking);
     }
 
     @Test
-    public void enterVehicle_motoNotExist_allowEnter() {
+    public void enterVehicle_carNotExist_allowEnter() {
         //Arrange
-        Moto moto = new MotoBuilder().withLicensePlate("BXC123").build();
-        Parking parking = new ParkingBuilder(moto).build();
-        Mockito.when(parkingRepository.getAmountMoto()).thenReturn(5);
+        Car car = new CarBuilder().withLicensePlate("BXC123").build();
+        Parking parking = new ParkingBuilder(car).build();
+        Mockito.when(parkingRepository.getAmountCar()).thenReturn(5);
         Mockito.when(parkingRepository.getByLicensePlate("BXC123")).thenReturn(null);
 
         //Act
-        motoParkingService.enterVehicle(parking);
+        carParkingService.enterVehicle(parking);
 
         //Assert
-        Mockito.verify(motoRepository).save(moto);
+        Mockito.verify(carRepository).save(car);
         Mockito.verify(parkingRepository).save(parking);
     }
 

@@ -10,6 +10,8 @@ public class CarTraslator {
     }
 
     public Car mapFromCarEntityToCar(CarEntity carEntity) {
+        if(carEntity == null)
+            return  null;
         return new Car(carEntity.getLicensePlate());
     }
 }

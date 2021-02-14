@@ -49,7 +49,7 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.UserView
 
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
         Parking parking = parkingList.get(position);
         holder.cylinderTextView.setVisibility(View.GONE);
         holder.ccTextView.setVisibility(View.GONE);

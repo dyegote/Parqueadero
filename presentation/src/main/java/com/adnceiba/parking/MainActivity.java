@@ -1,6 +1,8 @@
 package com.adnceiba.parking;
 
 import android.os.Bundle;
+
+import com.adnceiba.domain.aggregate.Parking;
 import com.adnceiba.domain.service.CarParkingService;
 import com.adnceiba.domain.service.MotoParkingService;
 import com.adnceiba.domain.service.VehicleTypeService;
@@ -25,7 +27,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class MainActivity extends AppCompatActivity implements EnterVehicleDialogFragment.EnterVehicleDialogListener {
+public class MainActivity extends AppCompatActivity implements EnterVehicleDialogFragment.EnterVehicleDialogListener, LeaveVehicleDialogFragment.LeaveVehicleDialogListener {
 
     private ParkingViewModel parkingViewModel;
     private ParkingAdapter parkingAdapter;
@@ -81,7 +83,8 @@ public class MainActivity extends AppCompatActivity implements EnterVehicleDialo
         parkingAdapter.setOnItemClickListenerPostButton(new ParkingAdapter.ClickListenerButton() {
             @Override
             public void onItemClick(int position, View v) {
-                DialogFragment dialog = new LeaveVehicleDialogFragment();
+                Parking parking = parkingAdapter.getParking(position);
+                DialogFragment dialog = new LeaveVehicleDialogFragment(parking);
                 dialog.show(getSupportFragmentManager(), "LeaveVehicleDialogFragment");
             }
         });
@@ -121,9 +124,14 @@ public class MainActivity extends AppCompatActivity implements EnterVehicleDialo
     }
 
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
+    public void onDialogEnterVehicleClick(DialogFragment dialog) {
         Utils.showMessage(this,"Vehiculo ingresado.").show();
         parkingViewModel.getParkings("");
     }
 
+    @Override
+    public void onDialogLeaveVehicleClick(DialogFragment dialog) {
+        Utils.showMessage(this,"Vehiculo salio.").show();
+        parkingViewModel.getParkings("");
+    }
 }

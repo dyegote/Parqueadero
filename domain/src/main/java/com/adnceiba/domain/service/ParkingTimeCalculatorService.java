@@ -35,25 +35,37 @@ public class ParkingTimeCalculatorService {
     }
 
     public float calculateParkingHours(float totalHours) {
+        float parkingHours = 0;
         if(totalHours < 9)
-            return totalHours;
+            parkingHours = totalHours;
         else{
-            if(totalHours < 24)
-                return  0;
-            else
-                return totalHours % 24;
+            if(totalHours <= 24)
+                parkingHours =  0;
+            else{
+                if(totalHours % 24 >= 9)
+                    parkingHours = totalHours % 24 - 9;
+                else
+                    parkingHours = totalHours % 24;
+            }
         }
+        return parkingHours;
     }
 
     public int calculateParkingDays(float totalHours) {
+        int totalDays = 0;
         if(totalHours < 9)
-            return 0;
+            totalDays = 0;
         else{
-            if(totalHours <= 9 || totalHours <= 24)
-                return 1;
-            else
-                return (int)(totalHours / 24);
+            if(totalHours <= 24)
+                totalDays = 1;
+            else{
+                if(totalHours % 24 >= 9)
+                    totalDays = (int)(totalHours / 24) + 1;
+                else
+                    totalDays = (int)(totalHours / 24);
+            }
         }
+        return totalDays;
     }
 
 }

@@ -60,7 +60,7 @@ public class EnterVehicleDialogFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.enter_vehicle_dialog, null);
 
         builder.setCancelable(false).setView(view)
-                // Add action buttons
+                .setTitle(R.string.enter_vehicle_tittle)
                 .setPositiveButton(R.string.accept, null)
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -78,7 +78,7 @@ public class EnterVehicleDialogFragment extends DialogFragment {
                     public void onClick(View view) {
                         if(enterVehicle()){
                             dismiss();
-                            listener.onDialogPositiveClick(EnterVehicleDialogFragment.this);
+                            listener.onDialogEnterVehicleClick(EnterVehicleDialogFragment.this);
                         }
 
                     }
@@ -172,7 +172,7 @@ public class EnterVehicleDialogFragment extends DialogFragment {
     }
 
     public interface EnterVehicleDialogListener {
-        public void onDialogPositiveClick(DialogFragment dialog);
+        public void onDialogEnterVehicleClick(DialogFragment dialog);
     }
 
     @Override

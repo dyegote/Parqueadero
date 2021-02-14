@@ -7,4 +7,8 @@ public class EntryNotAllowedException extends RuntimeException {
     public EntryNotAllowedException () {
         super(ONLY_CAN_ENTER_MONDAY_SUNDAY);
     }
+
+    public EntryNotAllowedException (String message) {
+        super(message);
+    }
 }

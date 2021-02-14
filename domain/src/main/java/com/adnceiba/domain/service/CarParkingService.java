@@ -2,15 +2,19 @@ package com.adnceiba.domain.service;
 
 import com.adnceiba.domain.aggregate.Parking;
 import com.adnceiba.domain.entity.Car;
+import com.adnceiba.domain.entity.Moto;
+import com.adnceiba.domain.exception.CapacityException;
+import com.adnceiba.domain.exception.EntryNotAllowedException;
 import com.adnceiba.domain.repository.CarRepository;
 import com.adnceiba.domain.repository.ParkingRepository;
 import com.adnceiba.domain.valueobject.Tariff;
 
 import javax.inject.Inject;
 
-public class CarParkingService implements IParking {
+public class CarParkingService {
 
     public static final int MAX_CAR_CAPACITY = 20;
+    public static final String PARKING_LICENSE_PLATE_ACTIVE = "Hay un vehiculo estacionado con esta placa.";
 
     CarRepository carRepository;
     ParkingRepository parkingRepository;
@@ -24,7 +28,6 @@ public class CarParkingService implements IParking {
         this.parkingRepository = parkingRepository;
     }
 
-    @Override
     public float calculatePrice(Parking parking) {
         ParkingTimeCalculatorService parkingTime = new ParkingTimeCalculatorService(parking.getArrivingTime(),parking.getLeavingTime());
         Tariff tariff = parking.getTariff().CAR;
@@ -32,19 +35,22 @@ public class CarParkingService implements IParking {
         return parkingTime.getParkingDays() * tariff.getDayPrice() + parkingTime.getParkingHours() * tariff.getHourPrice();
     }
 
-    @Override
-    public boolean checkCapacity(int currentAmount) {
-        return currentAmount <= MAX_CAR_CAPACITY;
-    }
-
-    @Override
     public void enterVehicle(Parking parking) {
-        carRepository.save((Car)parking.getVehicle());
+
+        if(parkingRepository.getAmountCar() >= MAX_CAR_CAPACITY)
+            throw new CapacityException(Tariff.CAR,MAX_CAR_CAPACITY);
+
+        Car car = carRepository.getByLicensePlate(parking.getVehicle().getLicensePlate());
+        if(car == null)
+            carRepository.save((Car) parking.getVehicle());
+
+        if(parkingRepository.getByLicensePlate(parking.getVehicle().getLicensePlate()) != null)
+            throw new EntryNotAllowedException(PARKING_LICENSE_PLATE_ACTIVE);
+
         parkingRepository.save(parking);
 
     }
 
-    @Override
     public Parking leaveVehicle(String licensePlate) {
         return null;
     }

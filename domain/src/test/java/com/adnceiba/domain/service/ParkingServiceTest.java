@@ -22,7 +22,7 @@ public class ParkingServiceTest {
         Parking parking = new ParkingBuilder(new CarBuilder().build())
                 .withArrivingTime(star)
                 .withLeavingTime(end).build();
-        IParking parkingService = new CarParkingService();
+        CarParkingService parkingService = new CarParkingService();
 
         //Act
         float total = parkingService.calculatePrice(parking);
@@ -39,7 +39,7 @@ public class ParkingServiceTest {
         Parking parking = new ParkingBuilder(new MotoBuilder().withCylinder(600).build())
                 .withArrivingTime(star)
                 .withLeavingTime(end).build();
-        IParking parkingService = new MotoParkingService();
+        MotoParkingService parkingService = new MotoParkingService();
 
         //Act
         float total = parkingService.calculatePrice(parking);

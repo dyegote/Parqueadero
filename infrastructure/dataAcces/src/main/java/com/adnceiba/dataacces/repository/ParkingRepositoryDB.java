@@ -46,9 +46,7 @@ public class ParkingRepositoryDB implements ParkingRepository {
 
     @Override
     public void updateInactive(Parking parking) {
-        ParkingEntity parkingEntity = new ParkingTraslator().mapFromParkingToParkingEntity(parking);
-        parkingEntity.setActive(false);
-        parkingDao.update(parkingEntity);
+        parkingDao.update(parking.getVehicle().getLicensePlate(),false);
     }
 
     @Override
@@ -56,6 +54,10 @@ public class ParkingRepositoryDB implements ParkingRepository {
         Vehicle vehicle = null;
 
         ParkingEntity parkingEntity = parkingDao.getByLicensePlateActive(licensePlate);
+
+        if(parkingEntity == null)
+            return  null;
+
         Tariff tariff = Tariff.valueOf(parkingEntity.getCarTypeId());
 
         switch (tariff){

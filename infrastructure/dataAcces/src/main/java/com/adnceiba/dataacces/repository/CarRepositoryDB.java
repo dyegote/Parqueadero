@@ -24,4 +24,9 @@ public class CarRepositoryDB implements CarRepository {
     public void save(Car car) {
         carDao.insert(new CarTraslator().mapFromCarToCarEntity(car));
     }
+
+    @Override
+    public Car getByLicensePlate(String licensePlate) {
+        return  new CarTraslator().mapFromCarEntityToCar(carDao.getByLicensePlate(licensePlate));
+    }
 }

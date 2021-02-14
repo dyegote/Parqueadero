@@ -14,13 +14,13 @@ public interface ParkingDao {
     @Insert
     void insert(ParkingEntity car);
 
-    @Update
-    void update(ParkingEntity user);
+    @Query("UPDATE Parking SET isActive = :isActive WHERE licensePlate = :licensePlate")
+    void update(String licensePlate, boolean isActive);
 
     @Query("SELECT * FROM Parking WHERE licensePlate = :licensePlate and isActive = 1")
     ParkingEntity getByLicensePlateActive(String licensePlate);
 
-    @Query("SELECT * FROM Parking WHERE isActive = 1 ORDER BY arrivingTime DESC")
+    @Query("SELECT * FROM Parking WHERE isActive = 1 and isActive = 1 ORDER BY arrivingTime DESC")
     List<ParkingEntity> getAllActive();
 
     @Query("SELECT * FROM Parking WHERE licensePlate like :licensePlate || '%' and isActive = 1 ORDER BY arrivingTime DESC")

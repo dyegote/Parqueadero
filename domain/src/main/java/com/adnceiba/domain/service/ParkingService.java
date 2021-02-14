@@ -23,4 +23,8 @@ public class ParkingService {
     public List<Parking> loadByLicensePlate(String licensePlate){
         return parkingRepository.searchByLicensePlate(licensePlate);
     }
+
+    public void inactivate(Parking parking){
+        parkingRepository.updateInactive(parking);
+    }
 }
