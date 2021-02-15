@@ -21,7 +21,6 @@ import com.adnceiba.domain.service.ParkingService;
 import com.adnceiba.domain.service.ParkingTimeCalculatorService;
 import com.adnceiba.domain.valueobject.Tariff;
 import com.adnceiba.parking.R;
-import com.adnceiba.parking.Utils;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,6 @@ import com.adnceiba.domain.service.MotoParkingService;
 import com.adnceiba.domain.service.VehicleTypeService;
 import com.adnceiba.domain.valueobject.Tariff;
 import com.adnceiba.parking.R;
-import com.adnceiba.parking.Utils;
 import com.adnceiba.parking.viewModel.VehicleTypeViewModel;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -101,6 +101,8 @@ public class EnterVehicleDialogFragment extends DialogFragment {
         this.cylinderTextView = (TextView) view.findViewById(R.id.cylinderTextView);
         this.licensePlateEdiText = (EditText) view.findViewById(R.id.licensePlateEditText);
         this.vehicleTypeViewModel = new ViewModelProvider(this).get(VehicleTypeViewModel.class);
+
+        this.licensePlateEdiText.setFilters(new InputFilter[]{Utils.INPUT_FILTER});
 
         this.vehicleTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {

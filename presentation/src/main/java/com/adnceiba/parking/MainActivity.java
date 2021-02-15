@@ -9,6 +9,7 @@ import com.adnceiba.domain.service.VehicleTypeService;
 import com.adnceiba.parking.adapters.ParkingAdapter;
 import com.adnceiba.parking.view.EnterVehicleDialogFragment;
 import com.adnceiba.parking.view.LeaveVehicleDialogFragment;
+import com.adnceiba.parking.view.Utils;
 import com.adnceiba.parking.viewModel.ParkingViewModel;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;

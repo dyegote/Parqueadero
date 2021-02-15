@@ -15,7 +15,7 @@
     <string name="license_plate">Placa:</string>
     <string name="cylinder">Cilindraje:</string>
     <string name="edit_text_search">Escriba la placa</string>
-    <string name="list_is_empty">List is empty</string>
+    <string name="list_is_empty">No se encontraron resultados</string>
     <string name="accept">ACEPTAR</string>
     <string name="cancel">CANCELAR</string>
     <string name="enter_vehicle_tittle">INGRESAR VEHICULO</string>
