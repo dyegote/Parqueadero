@@ -5,6 +5,7 @@ import com.adnceiba.domain.builder.CarBuilder;
 import com.adnceiba.domain.builder.ParkingBuilder;
 import com.adnceiba.domain.entity.Car;
 import com.adnceiba.domain.exception.CapacityException;
+import com.adnceiba.domain.exception.DomainException;
 import com.adnceiba.domain.exception.EntryNotAllowedException;
 import com.adnceiba.domain.repository.CarRepository;
 import com.adnceiba.domain.repository.ParkingRepository;
@@ -33,7 +34,7 @@ public class CarParkingServiceTest {
     }
 
     @Test
-    public void enterVehicle_licensePlateNotStarWithA_allowEnter() throws ParseException {
+    public void enterVehicle_licensePlateNotStarWithA_allowEnter() {
         //Arrange
         Car car = new CarBuilder().withLicensePlate("ZXC123").build();
         Parking parking = new ParkingBuilder(car).build();
@@ -95,6 +96,22 @@ public class CarParkingServiceTest {
     public void enterVehicle_carNotExist_allowEnter() {
         //Arrange
         Car car = new CarBuilder().withLicensePlate("BXC123").build();
+        Parking parking = new ParkingBuilder(car).build();
+        Mockito.when(parkingRepository.getAmountCar()).thenReturn(5);
+        Mockito.when(parkingRepository.getByLicensePlate("BXC123")).thenReturn(null);
+
+        //Act
+        carParkingService.enterVehicle(parking);
+
+        //Assert
+        Mockito.verify(carRepository).save(car);
+        Mockito.verify(parkingRepository).save(parking);
+    }
+
+    @Test(expected = DomainException.class)
+    public void enterVehicle_invalidLicensePlate_notAllowEnter() {
+        //Arrange
+        Car car = new CarBuilder().withLicensePlate("123456").build();
         Parking parking = new ParkingBuilder(car).build();
         Mockito.when(parkingRepository.getAmountCar()).thenReturn(5);
         Mockito.when(parkingRepository.getByLicensePlate("BXC123")).thenReturn(null);
