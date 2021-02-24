@@ -18,4 +18,8 @@ public class VehicleTypeService {
         return vehicleTypeRepository.loadAll();
     }
 
+    public VehicleType loadbyId(String id){
+        return vehicleTypeRepository.getById(id);
+    }
+
 }

@@ -5,26 +5,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.adnceiba.domain.aggregate.Parking;
 import com.adnceiba.domain.entity.Moto;
+import com.adnceiba.domain.service.VehicleTypeService;
 import com.adnceiba.domain.valueobject.Tariff;
 import com.adnceiba.parking.R;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
 
 public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.UserViewHolder>
 {
-
+    VehicleTypeService vehicleTypeService;
     Context context;
     List<Parking> parkingList;
     private static ClickListenerButton postButtonClickListener;
 
-    public ParkingAdapter(Context context) {
+    public ParkingAdapter(Context context, VehicleTypeService vehicleTypeService) {
         this.context = context;
+        this.vehicleTypeService = vehicleTypeService;
     }
 
     public ParkingAdapter(Context context, List<Parking> userModelList) {
@@ -56,13 +62,14 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.UserView
         holder.licensePlateEditText.setText(parking.getVehicle().getLicensePlate());
         holder.arrivingTimeTextView.setText(simpleDateFormat.format(parking.getArrivingTime()));
         holder.leavingTimeTextView.setText(simpleDateFormat.format(parking.getLeavingTime()));
-        holder.vehicleTypeTextView.setText(parking.getTariff().toString());
+        holder.vehicleTypeTextView.setText(vehicleTypeService.loadbyId(parking.getTariff().toString()).getName());
 
         if(parking.getTariff() == Tariff.MOTO){
             Moto moto = (Moto)parking.getVehicle();
             holder.cylinderTextView.setVisibility(View.VISIBLE);
             holder.ccTextView.setVisibility(View.VISIBLE);
             holder.cylinderTextView.setText(String.valueOf(moto.getCylinder()));
+            holder.vehicleImageView.setImageResource(R.drawable.ic_moto_24);
         }
     }
 
@@ -83,6 +90,7 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.UserView
         TextView vehicleTypeTextView;
         TextView cylinderTextView;
         TextView ccTextView;
+        ImageView vehicleImageView;
         Button leaveButton;
 
         public UserViewHolder(View itemView) {
@@ -93,6 +101,7 @@ public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.UserView
             vehicleTypeTextView = itemView.findViewById(R.id.vehicleTypeTextView);
             cylinderTextView = itemView.findViewById(R.id.cylinderTextView);
             ccTextView = itemView.findViewById(R.id.ccTextView);
+            vehicleImageView = itemView.findViewById(R.id.vehicleImageView);
             leaveButton = itemView.findViewById(R.id.leavingButton);
             leaveButton.setOnClickListener(this);
 

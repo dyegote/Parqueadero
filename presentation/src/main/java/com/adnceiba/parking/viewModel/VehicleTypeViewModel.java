@@ -11,7 +11,8 @@ import com.adnceiba.domain.service.VehicleTypeService;
 public class VehicleTypeViewModel extends ViewModel {
 
     private VehicleTypeService vehicleTypeService;
-    public MutableLiveData<List<VehicleType>> vehicleTypeLiveData = new MutableLiveData<>();
+    public MutableLiveData<List<VehicleType>> vehicleTypeListLiveData = new MutableLiveData<>();
+    public MutableLiveData<VehicleType> vehicleTypeLiveData = new MutableLiveData<>();
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private MutableLiveData<String> error = new MutableLiveData<>();
 
@@ -21,7 +22,12 @@ public class VehicleTypeViewModel extends ViewModel {
     }
 
     public LiveData<List<VehicleType>> getVehicleTypes() {
-        vehicleTypeLiveData.setValue(vehicleTypeService.loadAll());
+        vehicleTypeListLiveData.setValue(vehicleTypeService.loadAll());
+        return  vehicleTypeListLiveData;
+    }
+
+    public LiveData<VehicleType> getVehicleType(String id) {
+        vehicleTypeLiveData.setValue(vehicleTypeService.loadbyId(id));
         return  vehicleTypeLiveData;
     }
 }

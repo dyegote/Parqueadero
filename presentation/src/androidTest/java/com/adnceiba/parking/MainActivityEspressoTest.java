@@ -14,6 +14,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import javax.annotation.meta.When;
+
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -59,40 +61,66 @@ public class MainActivityEspressoTest {
     }
 
     @Test
-    public void emptyListTest() {
+    public void searchEmpty_invalidLicensePlate_emptyResult() {
+        Given:
         clickInputSearch();
+
+        When:
         keypressInputSearch("123456789");
+
+        Then:
         onView(allOf(withText("No se encontraron resultados"))).check(matches(withText("No se encontraron resultados")));
     }
 
     @Test
-    public void enterMotoTest() {
+    public void enterMoto_fillInputFields_allowEnter() {
+        Given:
         onView(withId(R.id.enterVehicleButton)).perform(click());
-        onView(withId(R.id.vehicleTypeSpinner)).perform(click());
-        onData(allOf(is(instanceOf(String.class)),is("MOTO"))).inRoot(isPlatformPopup()).perform(click());
-        onView(withId(R.id.cylinderTextViewEditText)).perform(replaceText("500"), closeSoftKeyboard());
+
+        When:
+        onView(withId(R.id.typeTextInputLayout)).perform(click());
+        onView(withText(containsString("MOTO"))).inRoot(isPlatformPopup()).perform(click());
+        onView(withId(R.id.cyilinderEditText)).perform(replaceText("500"), closeSoftKeyboard());
         onView(withId(R.id.licensePlateEditText)).perform(typeText("ZXC321"), closeSoftKeyboard());
         onView(withText("ACEPTAR")).perform(click());
+
+        Then:
         onView(anyOf(withText("Vehiculo ingresado."), withText("Hay un vehiculo estacionado con esta placa."))).check(matches(isDisplayed()));
     }
 
     @Test
-    public void enterCarTest() {
+    public void enterCar_fillInputFields_allowEnter() {
+        Given:
         onView(withId(R.id.enterVehicleButton)).perform(click());
-        onView(withId(R.id.vehicleTypeSpinner)).perform(click());
-        onData(allOf(is(instanceOf(String.class)),is("CAR"))).inRoot(isPlatformPopup()).perform(click());
+
+        When:
+        onView(withId(R.id.typeTextInputLayout)).perform(click());
+        onView(withText(containsString("CARRO"))).inRoot(isPlatformPopup()).perform(click());
         onView(withId(R.id.licensePlateEditText)).perform(typeText("IXC321"), closeSoftKeyboard());
         onView(withText("ACEPTAR")).perform(click());
+
+        Then:
         onView(anyOf(withText("Vehiculo ingresado."), withText("Hay un vehiculo estacionado con esta placa."))).check(matches(isDisplayed()));
     }
 
     @Test
-    public void leaveVehicleTest() {
-        clickInputSearch();
-        keypressInputSearch("IXC321");
-        onView(allOf(withId(R.id.leavingButton))).perform(click());
-        onView(allOf(withId(R.id.licensePlateTextView))).check(matches(withText(endsWith("IXC321"))));
+    public void leaveVehicle_selectActiveVehicle_leaveVehicle() {
+        Given:
+        onView(withId(R.id.enterVehicleButton)).perform(click());
+        onView(withId(R.id.typeTextInputLayout)).perform(click());
+        onView(withText(containsString("CARRO"))).inRoot(isPlatformPopup()).perform(click());
+        onView(withId(R.id.licensePlateEditText)).perform(typeText("IHZ234"), closeSoftKeyboard());
         onView(withText("ACEPTAR")).perform(click());
+        onView(withText("ACEPTAR")).perform(click());
+        clickInputSearch();
+        keypressInputSearch("IHZ234");
+
+        When:
+        onView(allOf(withId(R.id.leavingButton))).perform(click());
+        onView(allOf(withId(R.id.licensePlateTextView))).check(matches(withText(endsWith("IHZ234"))));
+        onView(withText("ACEPTAR")).perform(click());
+
+        Then:
         onView(withText("Vehiculo salio.")).check(matches(isDisplayed()));
     }
 

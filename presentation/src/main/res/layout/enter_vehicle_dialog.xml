@@ -1,53 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="30dp">
 
-    <LinearLayout
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:id="@+id/typeTextInputLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="50dp">
+        android:layout_height="wrap_content"
+        app:startIconDrawable="@drawable/ic_parking_24"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:errorEnabled="true"
+        android:hint="@string/vehicle_type">
 
-        <TextView
-            android:id="@+id/vehicleTypeTextView"
-            android:layout_width="wrap_content"
+        <AutoCompleteTextView
+            android:id="@+id/typeAutocomplete"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vehicle_type" />
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/vehicleTypeSpinner"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp" />
 
-        <TextView
-            android:id="@+id/cylinderTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cylinder" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cylinderTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/cylinder"
+        android:visibility="gone"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/ic_moto_24">
 
-        <EditText
-            android:id="@+id/cylinderTextViewEditText"
-            android:layout_width="150dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cyilinderEditText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:inputType="number"
-            android:text="50" />
+            android:maxLength="4" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/licensePlateTextView"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/licensePlateTextInputLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/license_plate" />
+            app:startIconDrawable="@drawable/ic_document_24"
+            app:endIconMode="clear_text"
+            app:boxBackgroundColor="@android:color/transparent"
+            android:hint="@string/license_plate">
 
-        <EditText
-            android:id="@+id/licensePlateEditText"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:inputType="textNoSuggestions|textCapCharacters"
-            android:maxLength="6" />
-    </LinearLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/licensePlateEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textNoSuggestions|textCapCharacters"
+                android:maxLength="6" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 </LinearLayout>

@@ -3,9 +3,11 @@ package com.adnceiba.parking;
 import android.os.Bundle;
 
 import com.adnceiba.domain.aggregate.Parking;
+import com.adnceiba.domain.entity.Moto;
 import com.adnceiba.domain.service.CarParkingService;
 import com.adnceiba.domain.service.MotoParkingService;
 import com.adnceiba.domain.service.VehicleTypeService;
+import com.adnceiba.domain.valueobject.Tariff;
 import com.adnceiba.parking.adapters.ParkingAdapter;
 import com.adnceiba.parking.view.EnterVehicleDialogFragment;
 import com.adnceiba.parking.view.LeaveVehicleDialogFragment;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements EnterVehicleDialo
     @Inject VehicleTypeService vehicleTypeService;
     @Inject CarParkingService carParkingService;
     @Inject MotoParkingService motoParkingService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,13 +82,20 @@ public class MainActivity extends AppCompatActivity implements EnterVehicleDialo
         parkingRecyclerView = findViewById(R.id.parkingRecyclerView);
         parkingRecyclerView.setHasFixedSize(true);
         parkingRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        parkingAdapter = new ParkingAdapter(MainActivity.this);
+        parkingAdapter = new ParkingAdapter(MainActivity.this, vehicleTypeService);
 
         parkingAdapter.setOnItemClickListenerPostButton(new ParkingAdapter.ClickListenerButton() {
             @Override
             public void onItemClick(int position, View v) {
                 Parking parking = parkingAdapter.getParking(position);
-                DialogFragment dialog = new LeaveVehicleDialogFragment(parking);
+                DialogFragment dialog = new LeaveVehicleDialogFragment();
+                Bundle args = new Bundle();
+                args.putLong(LeaveVehicleDialogFragment.KEY_ARRIVING_TIME, parking.getArrivingTime().getTime());
+                args.putString(LeaveVehicleDialogFragment.KEY_LICENSE_PLATE, parking.getVehicle().getLicensePlate());
+                if(parking.getTariff() == Tariff.MOTO)
+                    args.getInt( LeaveVehicleDialogFragment.KEY_CYLINDER, ((Moto)parking.getVehicle()).getCylinder());
+                args.putString(LeaveVehicleDialogFragment.KEY_ID_TARIFF, parking.getTariff().toString());
+                dialog.setArguments(args);
                 dialog.show(getSupportFragmentManager(), "LeaveVehicleDialogFragment");
             }
         });

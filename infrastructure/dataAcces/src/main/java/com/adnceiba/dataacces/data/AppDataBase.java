@@ -48,8 +48,8 @@ public abstract class AppDataBase extends RoomDatabase {
                             @Override
                             public void run() {
                                 List<VehicleTypeEntity> types = new ArrayList<>();
-                                types.add(new VehicleTypeEntity("MOTO", "Motorcycle Type"));
-                                types.add(new VehicleTypeEntity("CAR", "Car Type"));
+                                types.add(new VehicleTypeEntity("MOTO", "MOTO"));
+                                types.add(new VehicleTypeEntity("CAR", "CARRO"));
                                 getInstance(context).vehicleTypeDao().insertAll(types);
                             }
                         });

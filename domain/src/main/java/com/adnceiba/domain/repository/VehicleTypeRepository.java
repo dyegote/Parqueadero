@@ -7,4 +7,6 @@ public interface VehicleTypeRepository {
 
     List<VehicleType> loadAll();
 
+    VehicleType getById(String id);
+
 }

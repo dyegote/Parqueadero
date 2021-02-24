@@ -12,25 +12,37 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.adnceiba.domain.aggregate.Parking;
+import com.adnceiba.domain.entity.Car;
 import com.adnceiba.domain.entity.Moto;
+import com.adnceiba.domain.entity.Vehicle;
 import com.adnceiba.domain.service.CarParkingService;
 import com.adnceiba.domain.service.MotoParkingService;
 import com.adnceiba.domain.service.ParkingService;
 import com.adnceiba.domain.service.ParkingTimeCalculatorService;
 import com.adnceiba.domain.valueobject.Tariff;
 import com.adnceiba.parking.R;
+import com.adnceiba.parking.adapters.VehicleTypeAdapter;
+import com.adnceiba.parking.viewModel.VehicleTypeViewModel;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+
 import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class LeaveVehicleDialogFragment extends DialogFragment {
 
+    private VehicleTypeViewModel vehicleTypeViewModel;
+    public final static String KEY_ARRIVING_TIME = "arrivingTime";
+    public final static String KEY_LICENSE_PLATE = "licensePlate";
+    public final static String KEY_ID_TARIFF = "idTariff";
+    public final static String KEY_CYLINDER = "cylinder";
     private TextView licensePlateEditText;
     private TextView arrivingTimeTextView;
     private TextView leavingTimeTextView;
@@ -43,11 +55,13 @@ public class LeaveVehicleDialogFragment extends DialogFragment {
     private TextView totalHoursTextView;
     private TextView totalPriceTextView;
     private ImageView timeImageView;
-    private Parking parking;
+    private ImageView vehicleImageView;
     private float totalHours = 0;
     private float parkingHours = 0;
     private float totalDays = 0;
     private float totalPrice = 0;
+    private Parking parking;
+    private  Tariff tariff;
 
     @Inject MotoParkingService motoParkingService;
     @Inject CarParkingService carParkingService;
@@ -56,9 +70,7 @@ public class LeaveVehicleDialogFragment extends DialogFragment {
 
     LeaveVehicleDialogListener listener;
 
-    public LeaveVehicleDialogFragment(Parking parking) {
-        this.parking = parking;
-        this.parking.setLeavingTime(Calendar.getInstance().getTime().getTime());
+    public LeaveVehicleDialogFragment() {
     }
 
     @Override
@@ -96,9 +108,20 @@ public class LeaveVehicleDialogFragment extends DialogFragment {
             }
         });
 
+        Bundle args = getArguments();
+        tariff = Tariff.valueOf(args.getString(KEY_ID_TARIFF));
+        Vehicle vehicle = null;
+        if(tariff == Tariff.MOTO)
+            vehicle = new Moto(args.getString(KEY_LICENSE_PLATE),args.getInt(KEY_CYLINDER ));
+        else
+            vehicle = new Car(args.getString(KEY_LICENSE_PLATE));
+
+        parking = new Parking(args.getLong(KEY_ARRIVING_TIME),Calendar.getInstance().getTime().getTime(),vehicle,tariff);
+
         this.loadTotal();
         this.configureView(view);
-
+        this.loadObservers();
+        this.vehicleTypeViewModel.getVehicleType(parking.getTariff().toString());
 
         return alertDialog;
     }
@@ -116,6 +139,8 @@ public class LeaveVehicleDialogFragment extends DialogFragment {
         totalHoursTextView = view.findViewById(R.id.totalHoursTextView);
         totalPriceTextView = view.findViewById(R.id.totalPriceTextView);
         timeImageView = view.findViewById(R.id.timeImageView);
+        vehicleImageView = view.findViewById(R.id.vehicleImageView);
+        this.vehicleTypeViewModel = new ViewModelProvider(this).get(VehicleTypeViewModel.class);
 
         timeImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +149,6 @@ public class LeaveVehicleDialogFragment extends DialogFragment {
             }
         });
 
-
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
         DecimalFormat hourFormat = new DecimalFormat("##.00");
         this.cylinderTextView.setVisibility(View.GONE);
@@ -132,7 +156,6 @@ public class LeaveVehicleDialogFragment extends DialogFragment {
         this.licensePlateEditText.setText(parking.getVehicle().getLicensePlate());
         this.arrivingTimeTextView.setText(simpleDateFormat.format(parking.getArrivingTime()));
         this.leavingTimeTextView.setText(simpleDateFormat.format(parking.getLeavingTime()));
-        this.vehicleTypeTextView.setText(parking.getTariff().toString());
         this.totalDaysTextView.setText(String.format("%.0f",totalDays));
         this.totalHoursTextView.setText(String.format("%.1f",parkingHours));
         this.totalPriceTextView.setText(String.format("%,.2f",Math.floor(totalPrice)));
@@ -142,6 +165,7 @@ public class LeaveVehicleDialogFragment extends DialogFragment {
             this.cylinderTextView.setVisibility(View.VISIBLE);
             this.ccTextView.setVisibility(View.VISIBLE);
             this.cylinderTextView.setText(String.valueOf(moto.getCylinder()));
+            this.vehicleImageView.setImageResource(R.drawable.ic_moto_24);
         }
     }
 
@@ -166,6 +190,13 @@ public class LeaveVehicleDialogFragment extends DialogFragment {
             Utils.showMessage(getActivity(),ex.getMessage()).show();
         }
         return isLeave;
+    }
+
+    private void loadObservers(){
+        vehicleTypeViewModel.vehicleTypeLiveData.observe(this, vehicleType -> {
+            if(vehicleType != null)
+                this.vehicleTypeTextView.setText(vehicleType.getName());
+        });
     }
 
     public interface LeaveVehicleDialogListener {

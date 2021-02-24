@@ -33,4 +33,9 @@ public class VehicleTypeRepositoryDB implements VehicleTypeRepository {
 
         return vehicleTypeList;
     }
+
+    @Override
+    public VehicleType getById(String id) {
+        return new VehicleTypeTraslator().mapFromVehicleTypEntityeToVehicleType(vehicleTypeDao.getById(id));
+    }
 }
